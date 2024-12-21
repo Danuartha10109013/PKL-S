@@ -15,7 +15,20 @@ class DashboardController extends Controller
 
         // Total revisions (sum of `no_revisi` column)
         $totalRevisions = Material::count();
-        return view('pages.pegawai.index',compact('totalJobcards','totalRevisions'));
+
+        // Monthly Jobcard Data for Chart
+        $monthlyJobcards = JobCardM::selectRaw('MONTH(date) as month, COUNT(*) as count')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();     
+
+        // Prepare data for Chart.js
+        $monthlyJobcardLabels = $monthlyJobcards->pluck('month')->map(function ($month) {
+            return \Carbon\Carbon::create()->month($month)->format('F'); // Convert month numbers to names
+        });
+        $monthlyJobcardData = $monthlyJobcards->pluck('count');
+        return view('pages.pegawai.index',compact('totalJobcards','totalRevisions','monthlyJobcardLabels',
+            'monthlyJobcardData'));
     }
     public function admin()
     {
