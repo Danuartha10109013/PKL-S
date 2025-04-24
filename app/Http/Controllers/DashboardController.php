@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\JobCardM;
 use App\Models\Material;
+use App\Models\NotifM;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    public function clearnotif(){
+        NotifM::truncate();
+        return redirect()->back()->with('success', 'Notifikasi telah dibersihkan');
+    }
     public function pegawai()
     {
         // Total number of jobcards

@@ -48,35 +48,41 @@
               <img src="{{asset('bell-alert.svg')}}" width="5%" alt="">
             </button>
             <ul class="dropdown-menu p-3" style="width: 600px;" aria-labelledby="notificationDropdown">
-              @foreach ($notif as $n)
-                  <li class="dropdown-item">
-                      <div class="row">
-                          <div class="col-1">
-                              <strong>{{$loop->iteration}}</strong>
-                          </div>
-                          <div class="col-3 text-wrap text-break">
-                              <strong>Name</strong>
-                              <hr class="my-1">
-                              {{ $n->judul }}
-                          </div>
-                          <div class="col-3 text-wrap text-break">
-                              <strong>Jobcard</strong>
-                              <hr class="my-1">
-                              {{ $n->no_jobcard }}
-                          </div>
-                          <div class="col-2 text-wrap text-break">
-                              <strong>Jumlah</strong>
-                              <hr class="my-1">
-                              {{ $n->jumlah_pengadaan }}
-                          </div>
-                          <div class="col-3 text-wrap text-break">
-                              <strong>By</strong>
-                              <hr class="my-1">
-                              {{ \App\Models\User::find($n->user_id)->name }}
-                          </div>
-                      </div>
-                  </li>
-              @endforeach
+                @if (!$notif->isEmpty())  <!-- Menggunakan isEmpty() untuk memeriksa koleksi kosong -->
+                <a href="{{ route('pegawai.clear-notifikasi') }}" class="text text-danger mb-2">Hapus Semua Notifikasi</a>
+                @foreach ($notif as $n)
+                    <li class="dropdown-item">
+                        <div class="row">
+                            <div class="col-1">
+                                <strong>{{ $loop->iteration }}</strong>
+                            </div>
+                            <div class="col-3 text-wrap text-break">
+                                <strong>Name</strong>
+                                <hr class="my-1">
+                                {{ $n->judul }}
+                            </div>
+                            <div class="col-3 text-wrap text-break">
+                                <strong>Jobcard</strong>
+                                <hr class="my-1">
+                                {{ $n->no_jobcard }}
+                            </div>
+                            <div class="col-2 text-wrap text-break">
+                                <strong>Jumlah</strong>
+                                <hr class="my-1">
+                                {{ $n->jumlah_pengadaan }}
+                            </div>
+                            <div class="col-3 text-wrap text-break">
+                                <strong>By</strong>
+                                <hr class="my-1">
+                                {{ \App\Models\User::find($n->user_id)->name }}
+                            </div>
+                        </div>
+                    </li>
+                @endforeach
+            @else
+                <p>Tidak ada Notifikasi</p>
+            @endif
+            
 
             </ul>
           </div>

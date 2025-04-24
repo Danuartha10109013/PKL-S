@@ -57,6 +57,7 @@ Route::middleware([AutoLogout::class])->group(function () {
     //Pegawai
     Route::group(['prefix' => 'pegawai', 'middleware' => ['pegawai'], 'as' => 'pegawai.'], function () {
         // Dashboard
+        Route::get('/clear-notif', [DashboardController::class, 'clearnotif'])->name('clear-notifikasi');
         Route::get('/', [DashboardController::class, 'pegawai'])->name('dashboard'); 
         Route::prefix('kmaterial')->group(function () {
             Route::get('/',[KelolaMaterialController::class,'index'])->name('kmaterial');
@@ -65,7 +66,6 @@ Route::middleware([AutoLogout::class])->group(function () {
             Route::delete('/destroy/{id}',[KelolaMaterialController::class,'destroy'])->name('kmaterial.destroy');
         });
     });
-
     Route::group(['prefix' => 'direktur', 'middleware' => ['direktur'], 'as' => 'direktur.'], function () {
         Route::get('/', [DashboardController::class, 'direktur'])->name('dashboard'); 
         Route::prefix('laporan')->group(function () {
