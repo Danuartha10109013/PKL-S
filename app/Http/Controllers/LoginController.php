@@ -38,7 +38,7 @@ class LoginController extends Controller
             } elseif ($user->role == 2) {
                 return redirect()->route('direktur.dashboard');
             } elseif ($user->role == 3) {
-                return redirect()->route('sales.dashboard');
+                return redirect()->route('penjualan.dashboard');
             }
         } else {
             // Redirect kembali ke halaman login jika gagal

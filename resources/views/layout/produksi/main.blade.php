@@ -45,7 +45,7 @@
 @elseif (Auth::user()->role == 2)
   @include('layout.direktur.sidebar')
 @elseif (Auth::user()->role == 3)
-  @include('layout.sales.sidebar')
+  @include('layout.penjualan.sidebar')
 
 @endif
   

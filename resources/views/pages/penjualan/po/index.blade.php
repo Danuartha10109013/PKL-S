@@ -1,6 +1,6 @@
 @extends('layout.produksi.main')
 
-@section('title', 'Kelola PO || Sales')
+@section('title', 'Kelola PO || Penjualan')
 
 @section('pages', 'Kelola PO')
 
@@ -41,7 +41,7 @@
 
                                     </td>
                                     <td>
-                                        <a href="{{route('sales.po.edit',$order->id)}}" class="btn btn-primary">Edit</a>
+                                        <a href="{{route('penjualan.po.edit',$order->id)}}" class="btn btn-primary">Edit</a>
                                         <!-- Delete Button that triggers the Modal -->
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                             Delete
@@ -61,7 +61,7 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                                         <!-- The form is submitted when the user confirms the deletion -->
-                                                        <form action="{{ route('sales.po.destroy', $order->id) }}" method="POST" style="display:inline;">
+                                                        <form action="{{ route('penjualan.po.destroy', $order->id) }}" method="POST" style="display:inline;">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -85,7 +85,7 @@
 <!-- Add Purchase Order Modal -->
 <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="{{ route('sales.po.store') }}" method="POST">
+        <form action="{{ route('penjualan.po.store') }}" method="POST">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">

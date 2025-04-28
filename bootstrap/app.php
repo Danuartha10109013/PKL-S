@@ -28,7 +28,7 @@ return Application::configure(basePath: dirname(__DIR__))
             CheckDirektur::class,
             
         ]);
-        $middleware->appendToGroup('sales', [
+        $middleware->appendToGroup('penjualan', [
             CheckSales::class,
             
         ]);

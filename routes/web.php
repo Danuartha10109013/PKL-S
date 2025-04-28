@@ -29,6 +29,7 @@ Route::middleware([AutoLogout::class])->group(function () {
     Route::group(['prefix' => 'pengadaan', 'middleware' => ['pengadaan'], 'as' => 'pengadaan.'], function () {
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'admin'])->name('dashboard'); 
+        Route::get('/clear-notif', [DashboardController::class, 'clearnotif'])->name('clear-notifikasi');
 
         Route::prefix('jobcard')->group(function () {
             Route::get('/', [JobCardController::class, 'index'])->name('jobcard');
@@ -74,8 +75,9 @@ Route::middleware([AutoLogout::class])->group(function () {
         });
         
     });
-    Route::group(['prefix' => 'sales', 'middleware' => ['sales'], 'as' => 'sales.'], function () {
+    Route::group(['prefix' => 'penjualan', 'middleware' => ['penjualan'], 'as' => 'penjualan.'], function () {
         Route::get('/', [DashboardController::class, 'sales'])->name('dashboard'); 
+        
         Route::prefix('laporan')->group(function () {
 
         });

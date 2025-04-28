@@ -1,5 +1,5 @@
 @extends('layout.produksi.main')
-@section('title', 'Edit PO || Sales')
+@section('title', 'Edit PO || Penjualan')
 
 @section('pages', 'Edit PO - ' . $order->nomor_po)
 
@@ -10,7 +10,7 @@
         <h3>Edit Purchase Order - {{ $order->nomor_po }}</h3>
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('sales.po.update', $order->id) }}" method="POST">
+                <form action="{{ route('penjualan.po.update', $order->id) }}" method="POST">
                     @csrf
                     @method('PUT')
 
@@ -95,7 +95,7 @@
 
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary">Save Changes</button>
-                        <a href="{{ route('sales.po') }}" class="btn btn-secondary">Cancel</a>
+                        <a href="{{ route('penjualan.po') }}" class="btn btn-secondary">Cancel</a>
                     </div>
                 </form>
             </div>

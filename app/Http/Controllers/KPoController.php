@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NotifM;
+use App\Models\NotifPengadaanM;
 use App\Models\POM;
 use App\Models\ProductM;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class KPoController extends Controller
@@ -109,7 +112,7 @@ class KPoController extends Controller
 
     // Generate the new offer number in the format: 'PN/YYYY-MM/XX'
     $newPenawaranNumber = 'PN/' . Carbon::now()->format('Y-m') . '/' . $newUniqueNumber;
-        return view('pages.sales.po.index',compact('listProduct','data','productList', 'newPoNumber','newPenawaranNumber'));
+        return view('pages.penjualan.po.index',compact('listProduct','data','productList', 'newPoNumber','newPenawaranNumber'));
     }
 
     public function store(Request $request)
@@ -156,6 +159,14 @@ class KPoController extends Controller
         'product' => json_encode($productsWithQty),  // Store the products and qty as JSON
     ]);
 
+    $notif = new NotifPengadaanM(); // Membuat instance baru dari model NotifPengadaanM
+    $notif->title = "PO Baru terdeteksi"; // Mengisi kolom 'title' dengan teks "PO Baru terdeteksi"
+    $notif->value = "PO dengan nomor ".$request->nomor_po; // Mengisi kolom 'value' dengan teks berisi nomor PO dari request
+    $notif->pengirm_id = Auth::user()->id; // Mengisi kolom 'pengirim_id' dengan ID user yang sedang login
+    $notif->status = 0; // Menetapkan status notifikasi ke 0 (mungkin berarti 'belum dibaca' atau 'baru')
+    $notif->save(); // Menyimpan data notifikasi ke database
+
+
     return back()->with('success', 'Purchase Order added successfully.');
 }
 
@@ -165,7 +176,7 @@ public function edit($id)
     $order = POM::findOrFail($id);
     $productList = ProductM::all();  // Fetch all products if needed for the dropdown
 
-    return view('pages.sales.po.edit', compact('order', 'productList'));
+    return view('pages.penjualan.po.edit', compact('order', 'productList'));
 }
 
 
@@ -220,7 +231,7 @@ $order->update([
 ]);
 
     // Redirect back with a success message
-    return redirect()->route('sales.po')
+    return redirect()->route('penjualan.po')
                      ->with('success', 'PO updated successfully!');
 }
 

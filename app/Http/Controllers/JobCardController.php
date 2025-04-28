@@ -84,15 +84,16 @@ class JobCardController extends Controller
     // Store a newly created job card
     public function store(Request $request)
     {
+        // dd($request->all());
         // Validation
         $validator = Validator::make($request->all(), [
             'no_jobcard' => 'required|string|max:255|unique:jobcard',
             'date' => 'required|date',
             'kurs' => 'required|numeric',
             'customer_name' => 'required|string|max:255',
-            'no_po' => 'required|string|max:255',
-            'po_date' => 'required|date',
-            'po_received' => 'required|date',
+            'nomor_po' => 'required|string|max:255',
+            'tanggal_permintaan' => 'required|date',
+            'tanggal_terima_po' => 'required|date',
             // 'totalbop' => 'required|numeric',
             // 'totalsp' => 'required|numeric',
             // 'totalbp' => 'required|numeric',
@@ -111,9 +112,9 @@ class JobCardController extends Controller
         $jobCard->date = $request->date;
         $jobCard->kurs = $request->kurs;
         $jobCard->customer_name = $request->customer_name;
-        $jobCard->no_po = $request->no_po;
-        $jobCard->po_date = $request->po_date;
-        $jobCard->po_received = $request->po_received;
+        $jobCard->no_po = $request->nomor_po;
+        $jobCard->po_date = $request->tanggal_permintaan;
+        $jobCard->po_received = $request->tanggal_terima_po;
         $jobCard->totalbop = $request->totalbop;
         $jobCard->totalsp = $request->totalsp;
         $jobCard->totalbp = $request->totalbp;

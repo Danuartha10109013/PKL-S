@@ -18,36 +18,36 @@
           
         </div>
         @php
-        $user_id = Auth::user()->id;
-        $role = Auth::user()->role;
-        use Illuminate\Support\Facades\DB;
 
-        $notif = \App\Models\NotifM::where('status',0)->select('notif.*', 'material.unit_price')
-            ->join('material', 'notif.material_id', '=', 'material.id')
-            ->get()
-            ->map(function ($item) {
-                $unitPriceWeight = 0.75;
-                $jumlahPengadaanWeight = 0.25;
-                
-                $item->ahp_score = ($item->unit_price * $unitPriceWeight) + ($item->jumlah_pengadaan * $jumlahPengadaanWeight);
-                return $item;
-            })
-            ->sortByDesc('ahp_score'); // Mengurutkan berdasarkan skor AHP
-            // dd($notif);
-        @endphp
-        @if (Auth::user()->role == 1)
-          <div class="dropdown">
-            <button 
-              class="btn btn-secondary " 
-              type="button" 
-              id="notificationDropdown" 
-              data-bs-toggle="dropdown" 
-              aria-expanded="false">Notifikasi
-              <i class="mdi mdi-bell-alert"></i>
-              <img src="{{asset('bell-alert.svg')}}" width="5%" alt="">
-            </button>
-            <ul class="dropdown-menu p-3" style="width: 600px;" aria-labelledby="notificationDropdown">
-                @if (!$notif->isEmpty())  <!-- Menggunakan isEmpty() untuk memeriksa koleksi kosong -->
+    $user_id = Auth::user()->id;
+    $role = Auth::user()->role;
+
+    $notif = \App\Models\NotifM::where('status',0)
+        ->join('material', 'notif.material_id', '=', 'material.id')
+        ->select('notif.*', 'material.unit_price')
+        ->get()
+        ->map(function ($item) {
+            $unitPriceWeight = 0.75;
+            $jumlahPengadaanWeight = 0.25;
+            
+            $item->ahp_score = ($item->unit_price * $unitPriceWeight) + ($item->jumlah_pengadaan * $jumlahPengadaanWeight);
+            return $item;
+        })
+        ->sortByDesc('ahp_score');
+
+    $notifPengadaan = \App\Models\NotifPengadaanM::where('status', 0)->latest()->get();
+@endphp
+
+@if ($role == 1)
+    {{-- ROLE 1 NOTIFICATION --}}
+    <div class="dropdown">
+        <button class="btn btn-secondary" type="button" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Notifikasi
+            <i class="mdi mdi-bell-alert"></i>
+            <img src="{{ asset('bell-alert.svg') }}" width="5%" alt="">
+        </button>
+        <ul class="dropdown-menu p-3" style="width: 600px;" aria-labelledby="notificationDropdown">
+            @if (!$notif->isEmpty())
                 <a href="{{ route('produksi.clear-notifikasi') }}" class="text text-danger mb-2">Hapus Semua Notifikasi</a>
                 @foreach ($notif as $n)
                     <li class="dropdown-item">
@@ -79,13 +79,53 @@
                     </li>
                 @endforeach
             @else
-                <p>Tidak ada Notifikasi</p>
+                <li class="dropdown-item">Tidak ada notifikasi</li>
             @endif
-            
+        </ul>
+    </div>
 
-            </ul>
-          </div>
-        @endif
+@elseif ($role == 0)
+    {{-- ROLE 0 NOTIFICATION --}}
+    <div class="dropdown">
+        <button class="btn btn-secondary" type="button" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Notifikasi
+            <i class="mdi mdi-bell-alert"></i>
+            <img src="{{ asset('bell-alert.svg') }}" width="5%" alt="">
+        </button>
+        <ul class="dropdown-menu p-3" style="width: 600px;" aria-labelledby="notificationDropdown">
+            @if (!$notifPengadaan->isEmpty())
+                <a href="{{ route('pengadaan.clear-notifikasi') }}" class="text text-danger mb-2">Hapus Semua Notifikasi</a>
+                @foreach ($notifPengadaan as $n)
+                    <li class="dropdown-item">
+                        <div class="row">
+                            <div class="col-1">
+                                <strong>{{ $loop->iteration }}</strong>
+                            </div>
+                            <div class="col-3 text-wrap text-break">
+                                <strong>Name</strong>
+                                <hr class="my-1">
+                                {{ $n->title }}
+                            </div>
+                            <div class="col-3 text-wrap text-break">
+                                <strong>Isi</strong>
+                                <hr class="my-1">
+                                {{ $n->value }}
+                            </div>
+                            <div class="col-3 text-wrap text-break">
+                                <strong>By</strong>
+                                <hr class="my-1">
+                                {{ \App\Models\User::find($n->pengirm_id)->name }}
+                            </div>
+                        </div>
+                    </li>
+                @endforeach
+            @else
+                <li class="dropdown-item">Tidak ada notifikasi</li>
+            @endif
+        </ul>
+    </div>
+@endif
+
         
         
       <ul class="navbar-nav ms-auto align-items-center">

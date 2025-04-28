@@ -13,7 +13,7 @@
     <ul class="navbar-nav">   
 
         <li class="nav-item">
-            <a class="nav-link text-white {{ Route::is('sales.dashboard') ? 'active' : '' }}" href="{{ route('sales.dashboard') }}">
+            <a class="nav-link text-white {{ Route::is('penjualan.dashboard') ? 'active' : '' }}" href="{{ route('penjualan.dashboard') }}">
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="material-icons opacity-10">dashboard</i>
                 </div>
@@ -22,7 +22,7 @@
         </li>
         
         <li class="nav-item">
-            <a class="nav-link text-white {{ Route::is('sales.po') ? 'active' : '' }}" href="{{ route('sales.po') }}">
+            <a class="nav-link text-white {{ Route::is('penjualan.po') ? 'active' : '' }}" href="{{ route('penjualan.po') }}">
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="material-icons opacity-10">shopping_bag</i>
                 </div>

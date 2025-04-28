@@ -1,7 +1,7 @@
 @extends('layout.produksi.main')
 
 @section('title')
-    Dashboard || Sales
+    Dashboard || Bagian Penjualan
 @endsection
 
 @section('pages')
