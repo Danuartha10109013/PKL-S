@@ -5,12 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\JobCardM;
 use App\Models\Material;
 use App\Models\NotifM;
+use App\Models\NotifPengadaanM;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function clearnotif(){
-        NotifM::truncate();
+        if(Auth::user()->role == 0){
+            
+            NotifPengadaanM::truncate();
+        }else{
+
+            NotifM::truncate();
+        }
         return redirect()->back()->with('success', 'Notifikasi telah dibersihkan');
     }
 
