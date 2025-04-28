@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('no_penawaran');
             $table->string('status_penawaran');
             $table->date('tanggal_permintaan');
-            $table->json('qty');
             $table->date('tanggal_terima_po');
             $table->float('harga_ditawarkan');
             $table->float('harga_disetujui');
