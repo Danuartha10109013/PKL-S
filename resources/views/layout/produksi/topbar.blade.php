@@ -154,10 +154,36 @@
         
         <!-- Logout Button -->
         <li class="nav-item d-flex align-items-center">
-            <a href="{{ route('logout') }}" class="nav-link text-body font-weight-bold px-0">
+            <a href="{{ route('logout') }}" class="nav-link text-body font-weight-bold px-0" id="logout-link">
                 <i class="fa fa-sign-out me-sm-1"></i>
                 <span class="d-sm-inline d-none">Sign Out</span>
             </a>
+            
+            <!-- SweetAlert2 CDN -->
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            
+            <!-- Konfirmasi Logout -->
+            <script>
+            document.getElementById('logout-link').addEventListener('click', function(event) {
+                event.preventDefault();
+            
+                Swal.fire({
+                    title: 'Yakin mau keluar?',
+                    text: "Kamu akan logout dari sistem!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, Logout',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = this.href;
+                    }
+                });
+            });
+            </script>
+            
         </li>
     </ul>
     
