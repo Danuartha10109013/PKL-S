@@ -39,11 +39,13 @@
 
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
 @if (Auth::user()->role == 0)
-  @include('layout.admin.sidebar')
+  @include('layout.pengadaan.sidebar')
 @elseif (Auth::user()->role == 1)
-  @include('layout.pegawai.sidebar')
+  @include('layout.produksi.sidebar')
 @elseif (Auth::user()->role == 2)
   @include('layout.direktur.sidebar')
+@elseif (Auth::user()->role == 3)
+  @include('layout.sales.sidebar')
 
 @endif
   
@@ -53,7 +55,7 @@
         <!-- Navbar -->
 
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
-  @include('layout.pegawai.topbar')
+  @include('layout.produksi.topbar')
 </nav>
 
 <!-- End Navbar -->
@@ -88,7 +90,7 @@
 @yield('content')
 
 <footer class="footer py-4  ">
- @include('layout.pegawai.footer')
+ @include('layout.produksi.footer')
 </footer>
             </div>
        </main>

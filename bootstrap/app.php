@@ -3,6 +3,7 @@
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckDirektur;
 use App\Http\Middleware\CheckPegawai;
+use App\Http\Middleware\CheckSales;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -15,16 +16,20 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->appendToGroup('admin', [
+        $middleware->appendToGroup('pengadaan', [
             CheckAdmin::class,
             
         ]);
-        $middleware->appendToGroup('pegawai', [
+        $middleware->appendToGroup('produksi', [
             CheckPegawai::class,
             
         ]);
         $middleware->appendToGroup('direktur', [
             CheckDirektur::class,
+            
+        ]);
+        $middleware->appendToGroup('sales', [
+            CheckSales::class,
             
         ]);
     })

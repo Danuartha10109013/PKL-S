@@ -72,7 +72,7 @@
 				</div>
 				<h1>Access Denied</h1>
 				<p>You don't have permission to access this page. Please contact your administrator if you think this is an error.</p>
-				<a href="{{route('pegawai.dashboard')}}" class="login100-form-btn">Go Back to Home</a>
+				<a href="javascript:history.back()" class="login100-form-btn">Go Back to Home</a>
 			</div>
 		</div>
 	</div>

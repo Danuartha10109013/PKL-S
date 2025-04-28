@@ -35,8 +35,7 @@
             ->sortByDesc('ahp_score'); // Mengurutkan berdasarkan skor AHP
             // dd($notif);
         @endphp
-        @if (Auth::user()->role == 0)
-          @else
+        @if (Auth::user()->role == 1)
           <div class="dropdown">
             <button 
               class="btn btn-secondary " 
@@ -49,7 +48,7 @@
             </button>
             <ul class="dropdown-menu p-3" style="width: 600px;" aria-labelledby="notificationDropdown">
                 @if (!$notif->isEmpty())  <!-- Menggunakan isEmpty() untuk memeriksa koleksi kosong -->
-                <a href="{{ route('pegawai.clear-notifikasi') }}" class="text text-danger mb-2">Hapus Semua Notifikasi</a>
+                <a href="{{ route('produksi.clear-notifikasi') }}" class="text text-danger mb-2">Hapus Semua Notifikasi</a>
                 @foreach ($notif as $n)
                     <li class="dropdown-item">
                         <div class="row">

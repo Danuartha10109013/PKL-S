@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobCardController;
 use App\Http\Controllers\JobcardDetailController;
 use App\Http\Controllers\KelolaMaterialController;
+use App\Http\Controllers\KPoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AutoLogout;
@@ -25,7 +26,7 @@ Route::middleware([AutoLogout::class])->group(function () {
     });
 
     // Admin 
-    Route::group(['prefix' => 'admin', 'middleware' => ['admin'], 'as' => 'admin.'], function () {
+    Route::group(['prefix' => 'pengadaan', 'middleware' => ['pengadaan'], 'as' => 'pengadaan.'], function () {
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'admin'])->name('dashboard'); 
 
@@ -55,7 +56,7 @@ Route::middleware([AutoLogout::class])->group(function () {
     });
 
     //Pegawai
-    Route::group(['prefix' => 'pegawai', 'middleware' => ['pegawai'], 'as' => 'pegawai.'], function () {
+    Route::group(['prefix' => 'produksi', 'middleware' => ['produksi'], 'as' => 'produksi.'], function () {
         // Dashboard
         Route::get('/clear-notif', [DashboardController::class, 'clearnotif'])->name('clear-notifikasi');
         Route::get('/', [DashboardController::class, 'pegawai'])->name('dashboard'); 
@@ -69,8 +70,31 @@ Route::middleware([AutoLogout::class])->group(function () {
     Route::group(['prefix' => 'direktur', 'middleware' => ['direktur'], 'as' => 'direktur.'], function () {
         Route::get('/', [DashboardController::class, 'direktur'])->name('dashboard'); 
         Route::prefix('laporan')->group(function () {
+            
+        });
+        
+    });
+    Route::group(['prefix' => 'sales', 'middleware' => ['sales'], 'as' => 'sales.'], function () {
+        Route::get('/', [DashboardController::class, 'sales'])->name('dashboard'); 
+        Route::prefix('laporan')->group(function () {
+
+        });
+        Route::prefix('po')->group(function () {
+            Route::get('/', [KPoController::class, 'index'])->name('po'); 
+            Route::post('/store', [KPoController::class, 'store'])->name('po.store'); 
+            Route::get('/edit/{id}', [KPoController::class, 'edit'])->name('po.edit'); 
+            Route::put('/update/{id}', [KPoController::class, 'update'])->name('po.update'); 
+            Route::delete('/destroy/{id}', [KPoController::class, 'destroy'])->name('po.destroy'); 
 
         });
     });
     
+    Route::get('/po/search', [KPoController::class, 'search'])->name('po.search');
+    Route::get('/get-po-details/{nomor_po}', [KPoController::class, 'getPoDetails']);
+    Route::post('/update-product', [KPoController::class, 'updateProduct']);
+    Route::post('/add-product', [KPoController::class, 'addProduct']);
+    Route::post('/delete-product', [KPoController::class, 'deleteProduct']);
+
+
 });
+

@@ -1,4 +1,4 @@
-@extends('layout.pegawai.main')
+@extends('layout.produksi.main')
 @section('title')
     Kelola Material || {{ Auth::user()->name }}
 @endsection
@@ -58,7 +58,7 @@ Kelola Material
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form action="{{ route('pegawai.kmaterial.update', $d->id) }}" method="POST">
+                          <form action="{{ route('produksi.kmaterial.update', $d->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
@@ -101,7 +101,7 @@ Kelola Material
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                          <form action="{{ route('pegawai.kmaterial.destroy', $d->id) }}" method="POST">
+                          <form action="{{ route('produksi.kmaterial.destroy', $d->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -128,7 +128,7 @@ Kelola Material
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <form action="{{ route('pegawai.kmaterial.store') }}" method="POST">
+              <form action="{{ route('produksi.kmaterial.store') }}" method="POST">
                   @csrf
                   <div class="mb-3">
                       <label for="name" class="form-label">Description</label>

@@ -13,7 +13,7 @@
     <ul class="navbar-nav">   
 
         <li class="nav-item">
-            <a class="nav-link text-white {{ Route::is('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
+            <a class="nav-link text-white {{ Route::is('pengadaan.dashboard') ? 'active' : '' }}" href="{{ route('pengadaan.dashboard') }}">
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="material-icons opacity-10">dashboard</i>
                 </div>
@@ -22,7 +22,7 @@
         </li>
         
         <li class="nav-item">
-            <a class="nav-link text-white {{ Route::is('admin.jobcard') ? 'active' : '' }}" href="{{ route('admin.jobcard') }}">
+            <a class="nav-link text-white {{ Route::is('pengadaan.jobcard') ? 'active' : '' }}" href="{{ route('pengadaan.jobcard') }}">
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="material-icons opacity-10">table_view</i>
                 </div>

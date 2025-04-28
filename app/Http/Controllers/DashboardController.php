@@ -13,6 +13,29 @@ class DashboardController extends Controller
         NotifM::truncate();
         return redirect()->back()->with('success', 'Notifikasi telah dibersihkan');
     }
+
+    public function sales(){
+        $totalJobcards = JobCardM::count();
+
+        // Total revisions (sum of `no_revisi` column)
+        $totalRevisions = Material::count();
+
+        // Monthly Jobcard Data for Chart
+        $monthlyJobcards = JobCardM::selectRaw('MONTH(date) as month, COUNT(*) as count')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();     
+
+        // Prepare data for Chart.js
+        $monthlyJobcardLabels = $monthlyJobcards->pluck('month')->map(function ($month) {
+            return \Carbon\Carbon::create()->month($month)->format('F'); // Convert month numbers to names
+        });
+        $monthlyJobcardData = $monthlyJobcards->pluck('count');
+        return view('pages.produksi.index',compact('totalJobcards','totalRevisions','monthlyJobcardLabels',
+            'monthlyJobcardData'));
+        return view('pages.sales.index',compact('totalJobcards','totalRevisions','monthlyJobcardLabels',
+        'monthlyJobcardData'));
+    }
     public function pegawai()
     {
         // Total number of jobcards
@@ -32,7 +55,7 @@ class DashboardController extends Controller
             return \Carbon\Carbon::create()->month($month)->format('F'); // Convert month numbers to names
         });
         $monthlyJobcardData = $monthlyJobcards->pluck('count');
-        return view('pages.pegawai.index',compact('totalJobcards','totalRevisions','monthlyJobcardLabels',
+        return view('pages.produksi.index',compact('totalJobcards','totalRevisions','monthlyJobcardLabels',
             'monthlyJobcardData'));
     }
     public function admin()
@@ -55,7 +78,7 @@ class DashboardController extends Controller
         });
         $monthlyJobcardData = $monthlyJobcards->pluck('count');
 
-        return view('pages.admin.index', compact(
+        return view('pages.pengadaan.index', compact(
             'totalJobcards',
             'totalRevisions',
             'monthlyJobcardLabels',

@@ -10,7 +10,7 @@ class KelolaMaterialController extends Controller
 {
     public function index(){
         $data = Material::all();
-        return view('pages.pegawai.kmaterial.index',compact('data'));
+        return view('pages.produksi.kmaterial.index',compact('data'));
     }
 
     public function update(Request $request, $id)
@@ -44,7 +44,7 @@ class KelolaMaterialController extends Controller
         } 
 
         // Redirect with a success message
-        return redirect()->route('pegawai.kmaterial')->with('success', 'Material updated successfully.');
+        return redirect()->route('produksi.kmaterial')->with('success', 'Material updated successfully.');
     }
 
     // Delete the material data
@@ -55,7 +55,7 @@ class KelolaMaterialController extends Controller
         $material->delete();
 
         // Redirect with a success message
-        return redirect()->route('pegawai.kmaterial')->with('success', 'Material deleted successfully.');
+        return redirect()->route('produksi.kmaterial')->with('success', 'Material deleted successfully.');
     }
 
     public function store(Request $request)
@@ -79,7 +79,7 @@ class KelolaMaterialController extends Controller
     ]);
 
     // Redirect with success message
-    return redirect()->route('pegawai.kmaterial')->with('success', 'New material added successfully.');
+    return redirect()->route('produksi.kmaterial')->with('success', 'New material added successfully.');
 }
 
 }

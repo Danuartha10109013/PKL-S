@@ -32,11 +32,13 @@ class LoginController extends Controller
         
             // Redirect sesuai peran pengguna jika status aktif
             if ($user->role == 0) {
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('pengadaan.dashboard');
             } elseif ($user->role == 1) {
-                return redirect()->route('pegawai.dashboard');
+                return redirect()->route('produksi.dashboard');
             } elseif ($user->role == 2) {
                 return redirect()->route('direktur.dashboard');
+            } elseif ($user->role == 3) {
+                return redirect()->route('sales.dashboard');
             }
         } else {
             // Redirect kembali ke halaman login jika gagal

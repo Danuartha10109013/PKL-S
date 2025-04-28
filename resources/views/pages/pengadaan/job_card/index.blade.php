@@ -1,10 +1,10 @@
-@extends('layout.pegawai.main')
+@extends('layout.produksi.main')
 
 @section('title')
     @if (Auth::user()->role == 0)
-    Job Card || Admin
+    Job Card || Pengadaan
     @elseif (Auth::user()->role == 1)
-    Job Card || Pegawai
+    Job Card || Produksi
     @endif
 @endsection
 
@@ -18,7 +18,7 @@ Job Card
         <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
           <div class="d-flex justify-content-between mb-3">
             <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addJobCardModal">Add New Job Card</a>
-            <form action="{{route('admin.jobcard')}}" method="GET">
+            <form action="{{route('pengadaan.jobcard')}}" method="GET">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control" placeholder="Search...">
                     <button type="submit" class="btn btn-success">Search</button>
@@ -33,7 +33,7 @@ Job Card
                   <h6>Total Job Cards</h6>
                   <p class="text-sm mb-0">
                     <i class="fa fa-check text-info" aria-hidden="true"></i>
-                    <span class="font-weight-bold ms-1">30 done</span> this month
+                    <span class="font-weight-bold ms-1">{{$sumJobcard}} done</span> this month
                   </p>
                 </div>
                 <div class="col-lg-6 col-5 text-end">
@@ -79,14 +79,14 @@ Job Card
                       @endphp
                       {{$total}}
                         &nbsp;&nbsp;  
-                      <a href="{{route('admin.jobcard.material',$jobCard->id)}}">
+                      <a href="{{route('pengadaan.jobcard.material',$jobCard->id)}}">
                         <i class="material-icons text-success">visibility</i>
                       </a>
                       </td>
                       {{-- <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ $jobCard->totalbp }}</td> --}}
                       <td>&nbsp;&nbsp;&nbsp;&nbsp; 
                         <div style="margin-top: -25px" class="d-flex justify-content-center">
-                          <a href="{{route('admin.jobcard.detail.add',$jobCard->id)}}" class="mx-2" >
+                          <a href="{{route('pengadaan.jobcard.detail.add',$jobCard->id)}}" class="mx-2" >
                             <i class="material-icons text-success">add</i>
                         </a>
 
@@ -103,7 +103,7 @@ Job Card
                                   <h5 class="modal-title" id="editJobCardModalLabel{{ $jobCard->id }}">Edit Job Card</h5>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <form method="POST" action="{{ route('admin.jobcard.update', $jobCard->id) }}">
+                                <form method="POST" action="{{ route('pengadaan.jobcard.update', $jobCard->id) }}">
                                   @csrf
                                   @method('PUT')
                                   <div class="modal-body">
@@ -188,7 +188,7 @@ Job Card
                                         $job = \App\Models\JobCardM::find($jobCard->id);
                                       @endphp
                                         <h5 class="modal-title" id="viewModalLabel{{ $jobCard->id }}" style="color: white">Job Card Details - {{ $job->no_jobcard }}</h5> &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a href="{{route('admin.jobcard.print',$jobCard->id)}}" class="mt-2 btn btn-white"><i class="ml-3 material-icons text-black">print</i></a>
+                                        <a href="{{route('pengadaan.jobcard.print',$jobCard->id)}}" class="mt-2 btn btn-white"><i class="ml-3 material-icons text-black">print</i></a>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     
@@ -329,7 +329,7 @@ Job Card
                                       </div>
                                       <div class="modal-footer">
                                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                          <form action="{{ route('admin.jobcard.destroy', $jobCard->id) }}" method="POST">
+                                          <form action="{{ route('pengadaan.jobcard.destroy', $jobCard->id) }}" method="POST">
                                               @csrf
                                               @method('DELETE')
                                               <button type="submit" class="btn btn-danger">Delete</button>
@@ -422,60 +422,130 @@ Job Card
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{{ route('admin.jobcard.store') }}" method="POST">
+      <form action="{{ route('pengadaan.jobcard.store') }}" method="POST">
         @csrf
         <div class="modal-body">
           <div class="form-group">
             <label for="no_jobcard">Job Card Number</label>
             <input type="text" class="form-control" id="no_jobcard" style="outline: 1px solid #007bff;" value="{{$newJobCard}}" name="no_jobcard" required>
           </div>
+
           <div class="form-group">
             <label for="date">Date</label>
             <input type="date" class="form-control" id="date" style="outline: 1px solid #007bff;" value="{{now()->format('Y-m-d')}}" name="date" required>
           </div>
+
           <div class="form-group">
             <label for="kurs">Kurs</label>
             <input type="number" class="form-control" id="kurs" style="outline: 1px solid #007bff;" name="kurs" required>
           </div>
-          <div class="form-group">
-            <label for="customer_name">Customer Name</label>
-            <input type="text" class="form-control" id="customer_name" style="outline: 1px solid #007bff;" name="customer_name" required>
-          </div>
-          <div class="form-group">
-            <label for="no_po">PO Number</label>
-            <input type="text" class="form-control" id="no_po" style="outline: 1px solid #007bff;" name="no_po" required>
-          </div>
-          <div class="form-group">
-            <label for="po_date">PO Date</label>
-            <input type="date" class="form-control" id="po_date" name="po_date" style="outline: 1px solid #007bff;" required>
-          </div>
-          <div class="form-group">
-            <label for="po_received">PO Received Date</label>
-            <input type="date" class="form-control" id="po_received" name="po_received" required style="outline: 1px solid #007bff;">
 
+          <!-- Nomor PO -->
+          <div class="mb-3">
+            <label for="nomor_po_modal" class="form-label">Nomor PO</label>
+            <input type="text" class="form-control" id="nomor_po_modal" name="nomor_po" placeholder="Ketik Nomor PO..." autocomplete="off" required>
+            <ul id="po-suggestions" class="list-group mt-1" style="position: absolute; z-index: 1000; width: 90%; display: none;"></ul>
           </div>
-          
+
+          <!-- Nama Customer -->
+          <div class="mb-3">
+            <label for="customer_name_modal" class="form-label">Nama Customer</label>
+            <input type="text" class="form-control" id="customer_name_modal" name="customer_name" readonly style="background-color: #e9ecef;">
+          </div>
+
+          <!-- Tanggal Terima PO -->
+          <div class="mb-3">
+            <label for="tanggal_terima_po_modal" class="form-label">Tanggal Terima PO</label>
+            <input type="text" class="form-control" id="tanggal_terima_po_modal" name="tanggal_terima_po" readonly style="background-color: #e9ecef;">
+          </div>
+
+          <!-- Tanggal Permintaan -->
+          <div class="mb-3">
+            <label for="tanggal_permintaan_modal" class="form-label">Tanggal Permintaan</label>
+            <input type="text" class="form-control" id="tanggal_permintaan_modal" name="tanggal_permintaan" readonly style="background-color: #e9ecef;">
+          </div>
+
           <div class="form-group">
             <label for="no_form">Form Number</label>
             <input type="text" class="form-control" id="no_form" style="outline: 1px solid #007bff;" name="no_form" required>
           </div>
+
           <div class="form-group">
             <label for="effective_date">Effective Date</label>
             <input type="date" class="form-control" id="effective_date" style="outline: 1px solid #007bff;" name="effective_date" required>
           </div>
+
           <div class="form-group">
             <label for="no_revisi">Revision Number</label>
             <input type="number" class="form-control" id="no_revisi" style="outline: 1px solid #007bff;" name="no_revisi" value="1" readonly>
           </div>
         </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Save Job Card</button>
         </div>
+
       </form>
     </div>
   </div>
 </div>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<script>
+$(document).ready(function() {
+    $('#nomor_po_modal').on('input', function() {
+        var query = $(this).val();
+        if (query.length >= 1) {
+            $.ajax({
+                url: '/po/search', // ganti ini sesuai route search PO kamu
+                method: 'GET',
+                data: { q: query },
+                success: function(data) {
+                    $('#po-suggestions').empty().show();
+                    if (data.length > 0) {
+                        $.each(data, function(i, po) {
+                            $('#po-suggestions').append(`
+                                <li class="list-group-item list-group-item-action" style="cursor:pointer" 
+                                  data-nomor_po="${po.nomor_po}" 
+                                  data-nama_customer="${po.nama_customer}" 
+                                  data-tanggal_terima_po="${po.tanggal_terima_po}" 
+                                  data-tanggal_permintaan="${po.tanggal_permintaan}">
+                                  ${po.nomor_po}
+                                </li>
+                            `);
+                        });
+                    } else {
+                        $('#po-suggestions').append('<li class="list-group-item disabled">No PO ditemukan</li>');
+                    }
+                }
+            });
+        } else {
+            $('#po-suggestions').hide();
+        }
+    });
+
+    $(document).on('click', '#po-suggestions li', function() {
+        var nomorPo = $(this).data('nomor_po');
+        var namaCustomer = $(this).data('nama_customer');
+        var tanggalTerimaPo = $(this).data('tanggal_terima_po');
+        var tanggalPermintaan = $(this).data('tanggal_permintaan');
+
+        $('#nomor_po_modal').val(nomorPo);
+        $('#customer_name_modal').val(namaCustomer);
+        $('#tanggal_terima_po_modal').val(tanggalTerimaPo);
+        $('#tanggal_permintaan_modal').val(tanggalPermintaan);
+
+        $('#po-suggestions').hide();
+    });
+
+    $(document).click(function(e) {
+        if (!$(e.target).closest('#nomor_po_modal, #po-suggestions').length) {
+            $('#po-suggestions').hide();
+        }
+    });
+});
+</script>
 
 @endsection

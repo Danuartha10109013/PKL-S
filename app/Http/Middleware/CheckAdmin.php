@@ -13,7 +13,7 @@ class CheckAdmin
             if (Auth::user()->role == 0){
                 return $next($request);
             }
-            return response()->view('errors.custom', ['message' => 'Anda Bukan Admin'], 403);
+            return response()->view('errors.custom', ['message' => 'Anda Bukan Bagian Pengadaan'], 403);
         }
         return redirect('/');
         

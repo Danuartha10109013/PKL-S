@@ -1,4 +1,4 @@
-@extends('layout.pegawai.main')
+@extends('layout.produksi.main')
 
 @section('title')
     Dashboard || {{ Auth::user()->role == 0 ? 'Admin' : 'Pegawai' }}

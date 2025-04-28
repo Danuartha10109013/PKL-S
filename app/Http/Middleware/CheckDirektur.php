@@ -13,7 +13,7 @@ class CheckDirektur
             if (Auth::user()->role == 2){
                 return $next($request);
             }
-            return response()->view('errors.custom', ['message' => 'Anda Bukan Admin'], 403);
+            return response()->view('errors.custom', ['message' => 'Anda Bukan Direktur'], 403);
         }
         return redirect('/');
         

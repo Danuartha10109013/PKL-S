@@ -7,6 +7,7 @@ use App\Models\JobCard; // Ensure you have this model for Job Card
 use App\Models\JobCardDetailM;
 use App\Models\JobCardM;
 use App\Models\Material;
+use App\Models\POM;
 use Illuminate\Support\Facades\Validator;
 
 class JobCardController extends Controller
@@ -65,7 +66,12 @@ class JobCardController extends Controller
         $chartData[] = $total->totalsp;
     }
 
-    return view('pages.admin.job_card.index', compact('jobCards', 'orders', 'material', 'newJobCard', 'chartLabels', 'chartData'));
+    $currentMonth = now()->month; // Returns current month as integer (1-12)
+    $sumJobcard = JobCardM::whereMonth('created_at', $currentMonth)->count();
+
+    // dd($sumJobcard);
+    $po = POM::all();
+    return view('pages.pengadaan.job_card.index', compact('po','jobCards','sumJobcard', 'orders', 'material', 'newJobCard', 'chartLabels', 'chartData'));
 }
 
 
@@ -116,7 +122,7 @@ class JobCardController extends Controller
         $jobCard->no_revisi = $request->no_revisi;
         $jobCard->save();
 
-        return redirect()->route('admin.jobcard')->with('success', 'Job Card added successfully!');
+        return redirect()->route('pengadaan.jobcard')->with('success', 'Job Card added successfully!');
     }
 
     // Show a specific job card
@@ -177,7 +183,7 @@ class JobCardController extends Controller
         $jobCard->no_revisi = $request->no_revisi;
         $jobCard->save();
 
-        return redirect()->route('admin.jobcard')->with('success', 'Job Card updated successfully!');
+        return redirect()->route('pengadaan.jobcard')->with('success', 'Job Card updated successfully!');
     }
 
     // Delete a job card
@@ -193,21 +199,21 @@ class JobCardController extends Controller
         }
         $jobCard->delete();
 
-        return redirect()->route('admin.jobcard')->with('success', 'Job Card deleted successfully!');
+        return redirect()->route('pengadaan.jobcard')->with('success', 'Job Card deleted successfully!');
     }
 
     public function print($id){
 
         $data = JobCardM::find($id);
         $detail = JobCardDetailM::where('jobcard_id',$data->id)->get();
-        return view('pages.admin.job_card.print',compact('data','detail'));
+        return view('pages.pengadaan.job_card.print',compact('data','detail'));
     }
 
     public function material($id){
         $data = JobCardM::find($id);
         $detail = JobCardDetailM::where('jobcard_id',$data->id)->get();
 
-        return view('pages.admin.job_card.material',compact('data','detail'));
+        return view('pages.pengadaan.job_card.material',compact('data','detail'));
     }
 
     public function material_delete($id){

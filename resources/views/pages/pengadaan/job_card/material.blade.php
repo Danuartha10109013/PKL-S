@@ -1,4 +1,4 @@
-@extends('layout.pegawai.main')
+@extends('layout.produksi.main')
 
 @section('title')
     {{ Auth::user()->role == 0 ? 'Job Card || Admin' : 'Job Card || Pegawai' }}
@@ -77,7 +77,7 @@
                                         const button = event.relatedTarget; // Button that triggered the modal
                                         const id = button.getAttribute('data-bs-id'); // Extract info from data-bs-* attribute
                                         const form = document.getElementById('deleteForm');
-                                        form.action = `{{ route('admin.jobcard.material.delete', '') }}/${id}`;
+                                        form.action = `{{ route('pengadaan.jobcard.material.delete', '') }}/${id}`;
                                     });
                                 </script>
 

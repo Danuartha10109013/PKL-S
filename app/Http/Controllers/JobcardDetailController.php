@@ -13,7 +13,7 @@ class JobcardDetailController extends Controller
 {
     public function add($id){
         $material = Material::all();
-        return view('pages.admin.job_card.add',compact('material','id'));
+        return view('pages.pengadaan.job_card.add',compact('material','id'));
     }
     public function store(Request $request)
     {
@@ -59,7 +59,7 @@ class JobcardDetailController extends Controller
         $jc->save();
     
         // Redirect back with a success message
-        return redirect()->route('admin.jobcard')->with('success', 'Job card detail added successfully!');
+        return redirect()->route('pengadaan.jobcard')->with('success', 'Job card detail added successfully!');
     }
     
     public function addPengadaan($id,$qty,$prd){

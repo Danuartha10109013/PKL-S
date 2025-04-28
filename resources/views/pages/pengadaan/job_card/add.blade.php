@@ -1,4 +1,4 @@
-@extends('layout.pegawai.main')
+@extends('layout.produksi.main')
 
 @section('title')
     @if (Auth::user()->role == 0)
@@ -19,7 +19,7 @@
 <div class="card">
 <div class="container-fluid mt-0">
 
-        <form action="{{ route('admin.jobcard.detail.store') }}" method="POST">
+        <form action="{{ route('pengadaan.jobcard.detail.store') }}" method="POST">
             @csrf
 
             <div class="form-group mt-3">
@@ -94,7 +94,7 @@
             </div>
             <input type="hidden" id="ids" value="{{$id}}">
             <div class="mt-3">
-                <a href="{{ route('admin.jobcard') }}" class="btn btn-secondary">Back</a>
+                <a href="{{ route('pengadaan.jobcard') }}" class="btn btn-secondary">Back</a>
                 <button type="submit" class="btn btn-primary">Save Material</button>
             </div>
         </form>
@@ -155,7 +155,7 @@
                     cancelButtonText: 'Cancel'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "{{ route('admin.jobcard.pengadaan', ['','','']) }}/" + ids.value + "/" + qtyInput.value + "/" + materialId.value;
+                        window.location.href = "{{ route('pengadaan.jobcard.pengadaan', ['','','']) }}/" + ids.value + "/" + qtyInput.value + "/" + materialId.value;
                     } else {
                         qtyInput.value = maxQty;
                     }
