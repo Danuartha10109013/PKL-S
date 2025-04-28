@@ -61,12 +61,12 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'id' => 4,
-                'username' => 'sales',
-                'name' => 'Sales',
+                'username' => 'penjualan',
+                'name' => 'penjualan',
                 'role' => '3',
                 'active' => '1',
                 'profile' => null,
-                'email' => 'sales@gmail.com',
+                'email' => 'penjualan@gmail.com',
                 'email_verified_at' => null,
                 'password' => Hash::make('12345'), // already hashed
                 'remember_token' => null,
