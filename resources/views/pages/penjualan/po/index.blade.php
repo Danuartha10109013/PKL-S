@@ -122,10 +122,10 @@
                         <button type="button" class="btn btn-primary" id="add-product">Add Product</button>
                     </div>
                     
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="no_penawaran" class="form-label">No Penawaran</label>
                         <input type="text" style="border: 1px solid #000; outline: none;" value="{{$newPenawaranNumber}}" class="form-control" name="no_penawaran" required>
-                    </div>
+                    </div> --}}
                     <div class="mb-3">
                         <label for="status_penawaran" class="form-label">Status Penawaran</label>
                         <input type="text" style="border: 1px solid #000; outline: none;" class="form-control" name="status_penawaran" required>

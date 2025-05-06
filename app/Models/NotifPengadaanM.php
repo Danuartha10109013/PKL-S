@@ -16,5 +16,6 @@ class NotifPengadaanM extends Model
         'value',
         'pengirm_id',
         'status',
+        'po_id'
     ];
 }

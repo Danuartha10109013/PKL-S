@@ -30,6 +30,7 @@ Route::middleware([AutoLogout::class])->group(function () {
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'admin'])->name('dashboard'); 
         Route::get('/clear-notif', [DashboardController::class, 'clearnotif'])->name('clear-notifikasi');
+        Route::get('/po-detail/{id}', [KPoController::class, 'po_detail'])->name('po.detail');
 
         Route::prefix('jobcard')->group(function () {
             Route::get('/', [JobCardController::class, 'index'])->name('jobcard');

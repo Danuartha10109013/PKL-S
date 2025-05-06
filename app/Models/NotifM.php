@@ -16,5 +16,6 @@ class NotifM extends Model
         'jumlah_pengadaan',
         'user_id',
         'material_id',
+        'po_id',
     ];
 }

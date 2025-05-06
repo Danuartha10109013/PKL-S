@@ -71,7 +71,7 @@ Job Card
                     <tr >
                       <td>&nbsp;&nbsp;&nbsp;&nbsp; {{ $loop->iteration }}</td>
                       <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ $jobCard->no_jobcard }}</td>
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ $jobCard->date }}</td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ \Carbon\Carbon::parse($jobCard->date)->format('d M Y') }}</td>
                       <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ $jobCard->customer_name }}</td>
                       <td>&nbsp;&nbsp;&nbsp;&nbsp;
                       @php
@@ -201,13 +201,13 @@ Job Card
                                                 <div class="row mb-4">
                                                     <div class="col-md-6">
                                                         <strong>JC No : </strong> {{ $job->no_jobcard }} <br>
-                                                        <strong>Date : </strong> {{ $job->date }} <br>
+                                                        <strong>Date : </strong> {{ \Carbon\Carbon::parse($job->date)->format('d M Y') }} <br>
                                                         <strong>kurs : </strong> {{ $job->kurs }} <br>
                                                     </div>
                                                     <div class="col-md-6 text-end">
                                                         <strong>Customer Name : </strong> {{ $job->customer_name }} <br>
                                                         <strong>PO No : </strong> {{ $job->customer_name }} <br>
-                                                        <strong>PO Date : </strong> {{ $job->po_date }} <br>
+                                                        <strong>PO Date : </strong> {{ \Carbon\Carbon::parse($job->po_date)->format('d M Y') }} <br>
                                                         <strong>PO Received : </strong> {{ $job->po_received }} <br>
                                                     </div>
                                                 </div>
@@ -294,7 +294,7 @@ Job Card
                                                 <div class="row mt-2">
                                                     <div class="col-md-12 text-end">
                                                         <strong>No Form:</strong> {{ $job->no_form }} <br>
-                                                        <strong>Effective Date:</strong> {{ $job->effective_date }} <br>
+                                                        <strong>Effective Date:</strong> {{ \Carbon\Carbon::parse($job->effective_date)->format('d M Y') }} <br>
                                                         <strong>No Revisi:</strong> {{ $job->no_revisi }} <br>
                                                     </div>
                                                 </div>

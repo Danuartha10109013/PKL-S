@@ -31,10 +31,10 @@
                                 <input type="text" class="form-control" name="nama_customer" value="{{ $order->nama_customer }}" required>
                             </div>
         
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label for="no_penawaran" class="form-label">No Penawaran</label>
                                 <input type="text" class="form-control" name="no_penawaran" value="{{ $order->no_penawaran }}" required>
-                            </div>
+                            </div> --}}
                             <div class="mb-3">
                                 <label for="catatan" class="form-label">Catatan</label>
                                 <textarea class="form-control" name="catatan" rows="3">{{ $order->catatan }}</textarea>

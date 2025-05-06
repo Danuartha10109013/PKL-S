@@ -25,6 +25,10 @@ class KPoController extends Controller
     
         return response()->json(['success' => true]);
     }
+
+    public function po_detail($id){
+        
+    }
     
     public function addProduct(Request $request)
     {
@@ -73,7 +77,7 @@ class KPoController extends Controller
     }
 
     public function index(){
-        $data = POM::orderBy('created_at', 'desc')->get(); 
+        $data = POM::orderBy('created_at', 'desc')->get();
         $productList =ProductM::where('status', 0)->get();
         $listProduct =ProductM::all();
         $currentDate = Carbon::now()->format('Y-m-d');
@@ -96,23 +100,8 @@ class KPoController extends Controller
         // Generate the new PO number
         $newPoNumber = 'PO/' . Carbon::now()->format('Y-m') . '/' . $newUniqueNumber;
 
-        $lastPenawaran = POM::whereDate('created_at', Carbon::today())->orderBy('created_at', 'desc')->first();
-
-    // If an offer exists for the current day, increment the unique number
-    if ($lastPenawaran) {
-        // Extract the last unique number (last 2 digits) from the last 'no_penawaran'
-        preg_match('/(\d{2})$/', $lastPenawaran->no_penawaran, $matches);
-
-        // Increment the unique number (e.g., from 01 to 02)
-        $newUniqueNumber = str_pad((int)$matches[0] + 1, 2, '0', STR_PAD_LEFT);
-    } else {
-        // If no offer exists for today, start with 01
-        $newUniqueNumber = '01';
-    }
-
-    // Generate the new offer number in the format: 'PN/YYYY-MM/XX'
-    $newPenawaranNumber = 'PN/' . Carbon::now()->format('Y-m') . '/' . $newUniqueNumber;
-        return view('pages.penjualan.po.index',compact('listProduct','data','productList', 'newPoNumber','newPenawaranNumber'));
+       
+        return view('pages.penjualan.po.index',compact('listProduct','data','productList', 'newPoNumber'));
     }
 
     public function store(Request $request)
@@ -126,7 +115,7 @@ class KPoController extends Controller
         'product.*' => 'required|string',
         'qty' => 'required|array',
         'qty.*' => 'required|integer|min:1',
-        'no_penawaran' => 'required',
+        // 'no_penawaran' => 'required',
         'status_penawaran' => 'required',
         'tanggal_permintaan' => 'required|date',
         'tanggal_terima_po' => 'required|date',
@@ -145,11 +134,11 @@ class KPoController extends Controller
     }
     // dd(json_encode($productsWithQty));
     // Create the Purchase Order (PO) record with JSON data
-    POM::create([
+    $po = POM::create([
         'nomor_po' => $request->nomor_po,
         'tanggal_penawaran' => $request->tanggal_penawaran,
         'nama_customer' => $request->nama_customer,
-        'no_penawaran' => $request->no_penawaran,
+        // 'no_penawaran' => $request->no_penawaran,
         'status_penawaran' => $request->status_penawaran,
         'tanggal_permintaan' => $request->tanggal_permintaan,
         'tanggal_terima_po' => $request->tanggal_terima_po,
@@ -164,6 +153,7 @@ class KPoController extends Controller
     $notif->value = "PO dengan nomor ".$request->nomor_po; // Mengisi kolom 'value' dengan teks berisi nomor PO dari request
     $notif->pengirm_id = Auth::user()->id; // Mengisi kolom 'pengirim_id' dengan ID user yang sedang login
     $notif->status = 0; // Menetapkan status notifikasi ke 0 (mungkin berarti 'belum dibaca' atau 'baru')
+    $notif->po_id = $po->id; // Menetapkan status notifikasi ke 0 (mungkin berarti 'belum dibaca' atau 'baru')
     $notif->save(); // Menyimpan data notifikasi ke database
 
 
@@ -189,7 +179,7 @@ public function update(Request $request, $id)
         'nomor_po' => 'required|string|max:255',
         'tanggal_penawaran' => 'required|date',
         'nama_customer' => 'required|string|max:255',
-        'no_penawaran' => 'required|string|max:255',
+        // 'no_penawaran' => 'required|string|max:255',
         'catatan' => 'nullable|string',
         'status_penawaran' => 'required|string|max:255',
         'tanggal_permintaan' => 'required|date',
@@ -220,7 +210,7 @@ $order->update([
     'nomor_po' => $request->input('nomor_po'),
     'tanggal_penawaran' => $request->input('tanggal_penawaran'),
     'nama_customer' => $request->input('nama_customer'),
-    'no_penawaran' => $request->input('no_penawaran'),
+    // 'no_penawaran' => $request->input('no_penawaran'),
     'catatan' => $request->input('catatan'),
     'status_penawaran' => $request->input('status_penawaran'),
     'tanggal_permintaan' => $request->input('tanggal_permintaan'),

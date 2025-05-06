@@ -14,7 +14,7 @@ class POM extends Model
         'tanggal_penawaran',
         'nama_customer',
         'product',
-        'no_penawaran',
+        // 'no_penawaran',
         'status_penawaran',
         'tanggal_permintaan',
         'tanggal_terima_po',
@@ -23,4 +23,5 @@ class POM extends Model
         'catatan',
         'status',
     ];
+    
 }

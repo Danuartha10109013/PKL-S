@@ -45,6 +45,7 @@
             Notifikasi
             <i class="mdi mdi-bell-alert"></i>
             <img src="{{ asset('bell-alert.svg') }}" width="5%" alt="">
+            <small class="text text-danger">{{$notif->count()}}</small>
         </button>
         <ul class="dropdown-menu p-3" style="width: 600px;" aria-labelledby="notificationDropdown">
             @if (!$notif->isEmpty())
@@ -91,17 +92,19 @@
             Notifikasi
             <i class="mdi mdi-bell-alert"></i>
             <img src="{{ asset('bell-alert.svg') }}" width="5%" alt="">
+            <small class="text text-danger">{{$notifPengadaan->count()}}</small>
         </button>
         <ul class="dropdown-menu p-3" style="width: 600px;" aria-labelledby="notificationDropdown">
             @if (!$notifPengadaan->isEmpty())
                 <a href="{{ route('pengadaan.clear-notifikasi') }}" class="text text-danger mb-2">Hapus Semua Notifikasi</a>
                 @foreach ($notifPengadaan as $n)
+                {{-- <a href="{{route('pengadaan.po.detail', $n->po_id)}}"> --}}
                     <li class="dropdown-item">
                         <div class="row">
                             <div class="col-1">
                                 <strong>{{ $loop->iteration }}</strong>
                             </div>
-                            <div class="col-3 text-wrap text-break">
+                            <div class="col-2 text-wrap text-break">
                                 <strong>Name</strong>
                                 <hr class="my-1">
                                 {{ $n->title }}
@@ -111,13 +114,33 @@
                                 <hr class="my-1">
                                 {{ $n->value }}
                             </div>
-                            <div class="col-3 text-wrap text-break">
+                            <div class="col-2 text-wrap text-break">
                                 <strong>By</strong>
                                 <hr class="my-1">
                                 {{ \App\Models\User::find($n->pengirm_id)->name }}
                             </div>
+                            <div class="col-4 text-wrap text-break">
+                                <strong>Product</strong>
+                                <hr class="my-1">
+                                @php
+                                    $produk = \App\Models\POM::find($n->po_id);
+                                    $plist = $produk ? json_decode($produk->product) : [];
+                                @endphp
+
+                                @if (!empty($plist))
+                                    @foreach ($plist as $p)
+                                    {{ $p->product }} => {{ $p->qty }}<br>
+                                
+                                    @endforeach
+                                @else
+                                    <em>Tidak ada produk</em>
+                                @endif
+
+                            </div>
+                            
                         </div>
                     </li>
+                {{-- </a> --}}
                 @endforeach
             @else
                 <li class="dropdown-item">Tidak ada notifikasi</li>

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('tanggal_penawaran');
             $table->string('nama_customer');
             $table->json('product');
-            $table->string('no_penawaran');
+            // $table->string('no_penawaran');
             $table->string('status_penawaran');
             $table->date('tanggal_permintaan');
             $table->date('tanggal_terima_po');
