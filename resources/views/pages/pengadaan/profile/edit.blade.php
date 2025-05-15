@@ -82,11 +82,11 @@ Edit Profile
                                         &nbsp;
                                         <input type="text" name="username" class="form-control" value="{{ $user->username }}">
                                     </li>
-                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                    {{-- <li class="list-group-item border-0 ps-0 pt-0 text-sm">
                                         <strong class="text-dark">Username:</strong> 
                                         &nbsp;
                                         <input type="text" name="username" class="form-control" value="{{ $user->username }}">
-                                    </li>
+                                    </li> --}}
                                     <li class="list-group-item border-0 ps-0 text-sm">
                                         <strong class="text-dark">Full Name:</strong> 
                                         &nbsp;
@@ -121,11 +121,12 @@ Edit Profile
                                     
                                     <li class="list-group-item border-0 ps-0 text-sm">
                                         <strong class="text-dark">Created At:</strong> 
-                                        &nbsp; {{ $user->created_at }}
+                                        &nbsp; {{ optional($user->created_at)->format('d M Y') ?? '-' }}
+
                                     </li>
                                     <li class="list-group-item border-0 ps-0 text-sm">
                                         <strong class="text-dark">Updated At:</strong> 
-                                        &nbsp; {{ $user->updated_at }}
+                                        &nbsp; {{ $user->updated_at->format('d M Y') }}
                                     </li>
                                     <li class="list-group-item border-0 ps-0 text-sm">
                                         <strong class="text-dark">Location:</strong> 
