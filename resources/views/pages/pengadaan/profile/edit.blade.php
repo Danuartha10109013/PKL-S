@@ -134,7 +134,7 @@ Edit Profile
                                         <input type="text" name="location" class="form-control" value="Indonesia" readonly>
                                     </li>
                                     <li class="list-group-item border-3 text-sm">
-                                        <strong class="text-dark">Change Password:</strong> 
+                                        <strong class="text-dark">Change Password: (Optional)</strong> 
                                         &nbsp;
                                         <input type="password" name="password" class="form-control" placeholder="new password here ...">
                                         @error('password')

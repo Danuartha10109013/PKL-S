@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobCardM;
 use App\Models\NotifM;
 use App\Models\NotifPengadaanM;
 use App\Models\POM;
@@ -53,12 +54,20 @@ class KPoController extends Controller
 
 
     public function search(Request $request)
-    {
-        $query = $request->get('term');
-        $poList = POM::where('nomor_po', 'LIKE', '%' . $query . '%')->get();
+{
+    $query = $request->get('term');
 
-        return response()->json($poList);
-    }
+    // Ambil semua no_po yang sudah ada di JobCardM
+    $usedPOs = JobCardM::pluck('no_po')->toArray();
+
+    // Ambil data PO yang cocok dengan query dan belum ada di JobCardM
+    $poList = POM::where('nomor_po', 'LIKE', '%' . $query . '%')
+        ->whereNotIn('nomor_po', $usedPOs)
+        ->get();
+
+    return response()->json($poList);
+}
+
 
     // Menangani pengambilan detail PO berdasarkan nomor PO yang dipilih
     public function getPoDetails($nomor_po)

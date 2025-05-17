@@ -12,7 +12,19 @@ use Illuminate\Support\Facades\Auth;
 class JobcardDetailController extends Controller
 {
     public function add($id){
-        $material = Material::all();
+        $mt = Material::all();
+
+    // Kelompokkan berdasarkan nama
+    $grouped = $mt->groupBy('name');
+
+    // Proses penamaan ulang jika ada nama yang sama
+    $material = $mt->map(function ($item) use ($grouped) {
+        if ($grouped[$item->name]->count() > 1) {
+            // Tambahkan nama supplier jika nama material duplikat
+            $item->name = $item->name . ' (' . $item->supplier . ')';
+        }
+        return $item;
+    });
         return view('pages.pengadaan.job_card.add',compact('material','id'));
     }
     public function store(Request $request)

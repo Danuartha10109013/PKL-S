@@ -63,23 +63,23 @@ Kelola Material
                             @method('PUT')
                             <div class="mb-3">
                               <label for="name" class="form-label">Description</label>
-                              <input type="text" class="form-control" id="name" name="name" value="{{ $d->name }}">
+                              <input type="text" class="form-control" id="name" name="name" value="{{ $d->name }}" style="outline: 1px solid #007bff;">
                             </div>
                             <div class="mb-3">
                               <label for="stok" class="form-label">Stok</label>
-                              <input type="number" class="form-control" id="stok" name="stok" value="{{ $d->stok }}">
+                              <input type="number" class="form-control" id="stok" name="stok" value="{{ $d->stok }}" min="0" style="outline: 1px solid #007bff;">
                             </div>
                             <div class="mb-3">
                               <label for="unit_price" class="form-label">Unit Price</label>
-                              <input type="text" class="form-control" id="unit_price" name="unit_price" value="{{ $d->unit_price }}">
+                              <input type="text" class="form-control" id="unit_price" name="unit_price" value="{{ $d->unit_price }}" style="outline: 1px solid #007bff;">
                             </div>
                             <div class="mb-3">
                               <label for="buying_price" class="form-label">Buying Price</label>
-                              <input type="text" class="form-control" id="buying_price" name="buying_price" value="{{ $d->buying_price }}">
+                              <input type="text" class="form-control" id="buying_price" name="buying_price" value="{{ $d->buying_price }}" style="outline: 1px solid #007bff;">
                             </div>
                             <div class="mb-3">
                               <label for="supplier" class="form-label">Supplier</label>
-                              <input type="text" class="form-control" id="supplier" name="supplier" value="{{ $d->supplier }}">
+                              <input type="text" class="form-control" id="supplier" name="supplier" value="{{ $d->supplier }}" style="outline: 1px solid #007bff;">
                             </div>
                             <button type="submit" class="btn btn-primary">Save changes</button>
                           </form>
@@ -132,23 +132,23 @@ Kelola Material
                   @csrf
                   <div class="mb-3">
                       <label for="name" class="form-label">Description</label>
-                      <input type="text" class="form-control" id="name" name="name" required>
+                      <input type="text" class="form-control" id="name" name="name" required style="outline: 1px solid #007bff;">
                   </div>
                   <div class="mb-3">
                       <label for="stok" class="form-label">Stock</label>
-                      <input type="number" class="form-control" id="stok" name="stok" required>
+                      <input type="number" class="form-control" id="stok" name="stok" min="0" required style="outline: 1px solid #007bff;">
                   </div>
                   <div class="mb-3">
                       <label for="unit_price" class="form-label">Unit Price</label>
-                      <input type="text" class="form-control" id="unit_price" name="unit_price" required>
+                      <input type="text" class="form-control" id="unit_price" name="unit_price" required style="outline: 1px solid #007bff;">
                   </div>
                   <div class="mb-3">
                       <label for="buying_price" class="form-label">Buying Price</label>
-                      <input type="text" class="form-control" id="buying_price" name="buying_price" required>
+                      <input type="text" class="form-control" id="buying_price" name="buying_price" required style="outline: 1px solid #007bff;">
                   </div>
                   <div class="mb-3">
                       <label for="supplier" class="form-label">Supplier</label>
-                      <input type="text" class="form-control" id="supplier" name="supplier" required>
+                      <input type="text" class="form-control" id="supplier" name="supplier" required style="outline: 1px solid #007bff;">
                   </div>
                   <button type="submit" class="btn btn-primary">Add Material</button>
               </form>

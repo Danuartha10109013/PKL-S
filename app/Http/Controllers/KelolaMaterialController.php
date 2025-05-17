@@ -9,9 +9,23 @@ use Illuminate\Http\Request;
 class KelolaMaterialController extends Controller
 {
     public function index(){
-        $data = Material::all();
-        return view('pages.produksi.kmaterial.index',compact('data'));
-    }
+    $materials = Material::all();
+
+    // Kelompokkan berdasarkan nama
+    $grouped = $materials->groupBy('name');
+
+    // Proses penamaan ulang jika ada nama yang sama
+    $data = $materials->map(function ($item) use ($grouped) {
+        if ($grouped[$item->name]->count() > 1) {
+            // Tambahkan nama supplier jika nama material duplikat
+            $item->name = $item->name . ' (' . $item->supplier . ')';
+        }
+        return $item;
+    });
+
+    return view('pages.produksi.kmaterial.index', compact('data'));
+}
+
 
     public function update(Request $request, $id)
     {
