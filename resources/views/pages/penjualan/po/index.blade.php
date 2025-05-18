@@ -43,24 +43,24 @@
                                     <td>
                                         <a href="{{route('penjualan.po.edit',$order->id)}}" class="btn btn-primary">Edit</a>
                                         <!-- Delete Button that triggers the Modal -->
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        <!-- Tombol untuk membuka modal -->
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $order->id }}">
                                             Delete
                                         </button>
 
                                         <!-- Modal -->
-                                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="deleteModal{{ $order->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $order->id }}" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="deleteModalLabel">Are you sure you want to delete?</h5>
+                                                        <h5 class="modal-title" id="deleteModalLabel{{ $order->id }}">Are you sure you want to delete?</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p>Do you really want to delete the PO with number <strong>{{ $order->nomor_po }}</strong>?<br> This action cannot be undone.</p>
+                                                        <p>Do you really want to delete the PO with number <strong>{{ $order->nomor_po }}</strong>?<br>This action cannot be undone.</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                        <!-- The form is submitted when the user confirms the deletion -->
                                                         <form action="{{ route('penjualan.po.destroy', $order->id) }}" method="POST" style="display:inline;">
                                                             @csrf
                                                             @method('DELETE')
@@ -70,6 +70,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
 
                                     </td>
                                 </tr>
@@ -95,7 +96,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="nomor_po" class="form-label">Nomor PO</label>
-                        <input type="text" style="border: 1px solid #000; outline: none;" value="{{$newPoNumber}}" class="form-control" name="nomor_po" required>
+                        <input type="text" style="border: 1px solid #000; outline: none;" value="{{$newPoNumber}}" class="form-control" name="nomor_po" readonly required>
                     </div>
                     <div class="mb-3">
                         <label for="tanggal_penawaran" class="form-label">Tanggal Penawaran</label>
@@ -128,7 +129,7 @@
                     </div> --}}
                     <div class="mb-3">
                         <label for="status_penawaran" class="form-label">Status Penawaran</label>
-                        <input type="text" style="border: 1px solid #000; outline: none;" class="form-control" name="status_penawaran" required>
+                        <input type="text" style="border: 1px solid #000; outline: none;" class="form-control" value="Disetujui" readonly name="status_penawaran" required>
                     </div>
                     <div class="mb-3">
                         <label for="tanggal_permintaan" class="form-label">Tanggal Permintaan</label>

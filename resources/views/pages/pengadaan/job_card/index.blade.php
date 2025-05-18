@@ -110,58 +110,58 @@ Job Card
                                     <!-- Input Fields Here -->
                                     <div class="mb-3">
                                       <label for="no_jobcard{{ $jobCard->id }}" class="form-label">No Job Card</label>
-                                      <input type="text" class="form-control" id="no_jobcard{{ $jobCard->id }}" name="no_jobcard" value="{{ $jobCard->no_jobcard }}">
+                                      <input type="text" class="form-control" id="no_jobcard{{ $jobCard->id }}" style="border: 1px solid #000; outline: none;" name="no_jobcard" value="{{ $jobCard->no_jobcard }}" readonly>
                                     </div>
                                     <div class="mb-3">
                                         <label for="date" class="form-label">Date</label>
-                                        <input type="date" class="form-control" id="date" name="date" value="{{ $jobCard->date }}">
+                                        <input type="date" class="form-control" id="date" name="date" style="border: 1px solid #000; outline: none;" value="{{ $jobCard->date }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="customer_name" class="form-label">Customer Name</label>
-                                        <input type="text" class="form-control" id="customer_name" name="customer_name" value="{{ $jobCard->customer_name }}">
+                                        <input type="text" class="form-control" id="customer_name" style="border: 1px solid #000; outline: none;" name="customer_name" value="{{ $jobCard->customer_name }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="no_po" class="form-label">No PO</label>
-                                        <input type="text" class="form-control" id="no_po" name="no_po" value="{{ $jobCard->no_po }}">
+                                        <input type="text" class="form-control" id="no_po" style="border: 1px solid #000; outline: none;" name="no_po" value="{{ $jobCard->no_po }}" readonly>
                                     </div>
                                     <div class="mb-3">
                                         <label for="po_date" class="form-label">PO Date</label>
-                                        <input type="date" class="form-control" id="po_date" name="po_date" value="{{ $jobCard->po_date }}">
+                                        <input type="date" class="form-control" id="po_date" style="border: 1px solid #000; outline: none;" name="po_date" value="{{ $jobCard->po_date }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="po_received" class="form-label">PO Received</label>
-                                        <input type="date" class="form-control" id="po_received" name="po_received" value="{{ $jobCard->po_received }}">
+                                        <input type="date" class="form-control" id="po_received" style="border: 1px solid #000; outline: none;" name="po_received" value="{{ $jobCard->po_received }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="kurs" class="form-label">Kurs</label>
-                                        <input type="number" class="form-control" id="kurs" name="kurs" value="{{ $jobCard->kurs }}">
+                                        <input type="number" class="form-control" id="kurs" style="border: 1px solid #000; outline: none;" name="kurs" value="{{ $jobCard->kurs }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="totalbop" class="form-label">Total BOP</label>
-                                        <input type="number" class="form-control" id="totalbop" name="totalbop" value="{{ $jobCard->totalbop }}">
+                                        <input type="number" class="form-control" id="totalbop" style="border: 1px solid #000; outline: none;" name="totalbop" value="{{ $jobCard->totalbop }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="totalsp" class="form-label">Total SP</label>
-                                        <input type="number" class="form-control" id="totalsp" name="totalsp" value="{{ $jobCard->totalsp }}">
+                                        <input type="number" class="form-control" id="totalsp" style="border: 1px solid #000; outline: none;" name="totalsp" value="{{ $jobCard->totalsp }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="totalbp" class="form-label">Total BP</label>
-                                        <input type="number" class="form-control" id="totalbp" name="totalbp" value="{{ $jobCard->totalbp }}">
+                                        <input type="number" class="form-control" id="totalbp" style="border: 1px solid #000; outline: none;" name="totalbp" value="{{ $jobCard->totalbp }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="no_form" class="form-label">No Form</label>
-                                        <input type="text" class="form-control" id="no_form" name="no_form" value="{{ $jobCard->no_form }}">
+                                        <input type="text" class="form-control" id="no_form" style="border: 1px solid #000; outline: none;" name="no_form" value="{{ $jobCard->no_form }}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="effective_date" class="form-label">Effective Date</label>
-                                        <input type="date" class="form-control" id="effective_date" name="effective_date" value="{{ $jobCard->effective_date }}">
+                                        <input type="date" class="form-control" style="border: 1px solid #000; outline: none;" id="effective_date" name="effective_date" value="{{ $jobCard->effective_date }}">
                                     </div>
                                     <div class="mb-3">
                                       @php
                                         $no_revisi_new = $jobCard->no_revisi + 1 ;
                                       @endphp
                                         <label for="no_revisi" class="form-label">No Revisi</label>
-                                        <input type="number" class="form-control" id="no_revisi" name="no_revisi" value="{{$no_revisi_new}}">
+                                        <input type="number" class="form-control" id="no_revisi" style="border: 1px solid #000; outline: none;" name="no_revisi" value="{{$no_revisi_new}}">
                                     </div>
                                     </div>
                                     <div class="modal-footer">
@@ -443,7 +443,7 @@ Job Card
           <!-- Nomor PO -->
           <div class="mb-3">
             <label for="nomor_po_modal" class="form-label">Nomor PO</label>
-            <input type="text" class="form-control" id="nomor_po_modal" name="nomor_po" placeholder="Ketik Nomor PO..." autocomplete="off" required>
+            <input type="text" class="form-control" id="nomor_po_modal" name="nomor_po" maxlength="13" placeholder="Ketik Nomor PO..." autocomplete="off" required>
             <ul id="po-suggestions" class="list-group mt-1" style="position: absolute; z-index: 1000; width: 90%; display: none;"></ul>
           </div>
 
