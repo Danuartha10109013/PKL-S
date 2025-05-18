@@ -74,5 +74,8 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => '2024-11-26 07:12:11',
             ],
         ]);
+         $this->call([
+            ProductSeeder::class,
+        ]);
     }
 }

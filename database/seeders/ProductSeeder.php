@@ -24,5 +24,6 @@ class ProductSeeder extends Seeder
             ['name' => 'FMG Mechanical Seal for CEP Pump', 'status' => '0',  'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Mechanical Seal for Shang Kai Quan Pump', 'status' => '0',  'created_at' => now(), 'updated_at' => now()],
         ]);
+       
     }
 }
