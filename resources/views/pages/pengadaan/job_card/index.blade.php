@@ -427,7 +427,7 @@ Job Card
         <div class="modal-body">
           <div class="form-group">
             <label for="no_jobcard">Job Card Number</label>
-            <input type="text" class="form-control" id="no_jobcard" style="outline: 1px solid #007bff;" value="{{$newJobCard}}" name="no_jobcard" required>
+            <input type="text" class="form-control" id="no_jobcard" style="outline: 1px solid #007bff;" value="{{$newJobCard}}" name="no_jobcard" readonly required>
           </div>
 
           <div class="form-group">
