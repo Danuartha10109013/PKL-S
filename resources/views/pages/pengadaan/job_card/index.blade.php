@@ -136,7 +136,7 @@ Job Card
                                         <label for="kurs" class="form-label">Kurs</label>
                                         <input type="number" class="form-control" id="kurs" style="border: 1px solid #000; outline: none;" name="kurs" value="{{ $jobCard->kurs }}">
                                     </div>
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
                                         <label for="totalbop" class="form-label">Total BOP</label>
                                         <input type="number" class="form-control" id="totalbop" style="border: 1px solid #000; outline: none;" name="totalbop" value="{{ $jobCard->totalbop }}">
                                     </div>
@@ -147,7 +147,7 @@ Job Card
                                     <div class="mb-3">
                                         <label for="totalbp" class="form-label">Total BP</label>
                                         <input type="number" class="form-control" id="totalbp" style="border: 1px solid #000; outline: none;" name="totalbp" value="{{ $jobCard->totalbp }}">
-                                    </div>
+                                    </div> --}}
                                     <div class="mb-3">
                                         <label for="no_form" class="form-label">No Form</label>
                                         <input type="text" class="form-control" id="no_form" style="border: 1px solid #000; outline: none;" name="no_form" value="{{ $jobCard->no_form }}">
