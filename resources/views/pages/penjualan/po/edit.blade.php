@@ -18,7 +18,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="nomor_po" class="form-label">Nomor PO</label>
-                                <input type="text" class="form-control" name="nomor_po" value="{{ $order->nomor_po }}" required>
+                                <input type="text" class="form-control" name="nomor_po" value="{{ $order->nomor_po }}" required readonly>
                             </div>
         
                             <div class="mb-3">
