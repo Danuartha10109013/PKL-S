@@ -91,25 +91,24 @@ class KPoController extends Controller
         $listProduct =ProductM::all();
         $currentDate = Carbon::now()->format('Y-m-d');
 
-        // Check if the last PO number for the current date exists
-        $lastPo = POM::whereDate('created_at', Carbon::today())->orderBy('created_at', 'desc')->first();
-    
-        // If a PO exists for the current day, increment the unique number
+        // Ambil PO terakhir tanpa peduli tanggal
+        $lastPo = POM::orderBy('created_at', 'desc')->first();
+
+        // Jika ada PO sebelumnya, ambil angka terakhir (2 digit) dan increment
         if ($lastPo) {
-            // Extract the last unique number (last 2 digits) from the last PO number
             preg_match('/(\d{2})$/', $lastPo->nomor_po, $matches);
-    
-            // Increment the unique number (e.g., from 01 to 02)
-            $newUniqueNumber = str_pad((int)$matches[0] + 1, 2, '0', STR_PAD_LEFT);
+
+            // Jika match ditemukan, increment; jika tidak, mulai dari 01
+            $lastNumber = isset($matches[1]) ? (int)$matches[1] : 0;
+            $newUniqueNumber = str_pad($lastNumber + 1, 2, '0', STR_PAD_LEFT);
         } else {
-            // If no PO exists for today, start with 01
             $newUniqueNumber = '01';
         }
-    
-        // Generate the new PO number
+
+        // Buat nomor PO baru
         $newPoNumber = 'PO/' . Carbon::now()->format('Y-m') . '/' . $newUniqueNumber;
 
-       
+            
         return view('pages.penjualan.po.index',compact('listProduct','data','productList', 'newPoNumber'));
     }
 
