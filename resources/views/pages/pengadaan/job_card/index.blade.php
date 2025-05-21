@@ -206,7 +206,7 @@ Job Card
                                                     </div>
                                                     <div class="col-md-6 text-end">
                                                         <strong>Customer Name : </strong> {{ $job->customer_name }} <br>
-                                                        <strong>PO No : </strong> {{ $job->customer_name }} <br>
+                                                        <strong>PO No : </strong> {{ $job->no_po }} <br>
                                                         <strong>PO Date : </strong> {{ \Carbon\Carbon::parse($job->po_date)->format('d M Y') }} <br>
                                                         <strong>PO Received : </strong> {{ $job->po_received }} <br>
                                                     </div>
