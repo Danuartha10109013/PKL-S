@@ -43,7 +43,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="status_penawaran" class="form-label">Status Penawaran</label>
-                                <input type="text" class="form-control" name="status_penawaran" value="{{ $order->status_penawaran }}" required>
+                                <input type="text" class="form-control" name="status_penawaran" value="{{ $order->status_penawaran }}" readonly required>
                             </div>
         
                             <div class="mb-3">
