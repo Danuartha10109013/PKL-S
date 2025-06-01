@@ -42,14 +42,14 @@
     {{-- ROLE 1 NOTIFICATION --}}
     <div class="dropdown">
         <button class="btn btn-secondary" type="button" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            Notifikasi
+            Notification
             <i class="mdi mdi-bell-alert"></i>
             <img src="{{ asset('bell-alert.svg') }}" width="5%" alt="">
             <small class="text text-danger">{{$notif->count()}}</small>
         </button>
         <ul class="dropdown-menu p-3" style="width: 600px;" aria-labelledby="notificationDropdown">
             @if (!$notif->isEmpty())
-                <a href="{{ route('produksi.clear-notifikasi') }}" class="text text-danger mb-2">Hapus Semua Notifikasi</a>
+                <a href="{{ route('produksi.clear-notifikasi') }}" class="text text-danger mb-2">Delete All Notification</a>
                 @foreach ($notif as $n)
                     <li class="dropdown-item">
                         <div class="row">
@@ -67,7 +67,7 @@
                                 {{ $n->no_jobcard }}
                             </div>
                             <div class="col-2 text-wrap text-break">
-                                <strong>Jumlah</strong>
+                                <strong>Qty</strong>
                                 <hr class="my-1">
                                 {{ $n->jumlah_pengadaan }}
                             </div>
@@ -89,14 +89,14 @@
     {{-- ROLE 0 NOTIFICATION --}}
     <div class="dropdown">
         <button class="btn btn-secondary" type="button" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            Notifikasi
+            Notification
             <i class="mdi mdi-bell-alert"></i>
             <img src="{{ asset('bell-alert.svg') }}" width="5%" alt="">
             <small class="text text-danger">{{$notifPengadaan->count()}}</small>
         </button>
-        <ul class="dropdown-menu p-3" style="width: 600px;" aria-labelledby="notificationDropdown">
+        <ul class="dropdown-menu p-3" style="width: 800px;" aria-labelledby="notificationDropdown">
             @if (!$notifPengadaan->isEmpty())
-                <a href="{{ route('pengadaan.clear-notifikasi') }}" class="text text-danger mb-2">Hapus Semua Notifikasi</a>
+                <a href="{{ route('pengadaan.clear-notifikasi') }}" class="text text-danger mb-2">Delete All Notification</a>
                 @foreach ($notifPengadaan as $n)
                 {{-- <a href="{{route('pengadaan.po.detail', $n->po_id)}}"> --}}
                     <li class="dropdown-item">
@@ -110,16 +110,16 @@
                                 {{ $n->title }}
                             </div>
                             <div class="col-3 text-wrap text-break">
-                                <strong>Isi</strong>
+                                <strong>Value</strong>
                                 <hr class="my-1">
                                 {{ $n->value }}
                             </div>
-                            <div class="col-2 text-wrap text-break">
+                            <div class="col-1 text-wrap text-break">
                                 <strong>By</strong>
                                 <hr class="my-1">
                                 {{ \App\Models\User::find($n->pengirm_id)->name }}
                             </div>
-                            <div class="col-4 text-wrap text-break">
+                            <div class="col-3 text-wrap text-break">
                                 <strong>Product</strong>
                                 <hr class="my-1">
                                 @php
@@ -133,11 +133,15 @@
                                 
                                     @endforeach
                                 @else
-                                    <em>Tidak ada produk</em>
+                                    <em>No Existint Product</em>
                                 @endif
 
                             </div>
-                            
+                            <div class="col-2 text-wrap text-break">
+                                <strong>Notes</strong>
+                                <hr class="my-1">
+                                {{$produk->catatan}}
+                            </div>
                         </div>
                     </li>
                 {{-- </a> --}}

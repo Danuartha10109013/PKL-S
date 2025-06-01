@@ -26,7 +26,7 @@
                 <input type="hidden" value="{{ $id }}" name="job_card_id">
                 <label for="description">Description</label>
                 <select class="form-control" id="description" name="description" required style="outline: 1px solid #007bff;">
-                    <option value="" selected disabled>&nbsp;&nbsp;&nbsp;--Pilih Material--</option>
+                    <option value="" selected disabled>&nbsp;&nbsp;&nbsp;--Select Material--</option>
                     @foreach ($material as $m)
                         <option value="{{ $m->name }}" 
                                 data-id="{{ $m->id }}" 

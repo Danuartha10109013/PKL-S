@@ -25,7 +25,16 @@ Job Card
                 </div>
             </form>
           </div>
-        
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
           <div class="card">
             <div class="card-header pb-0">
               <div class="row">
@@ -442,26 +451,26 @@ Job Card
 
           <!-- Nomor PO -->
           <div class="mb-3">
-            <label for="nomor_po_modal" class="form-label">Nomor PO</label>
+            <label for="nomor_po_modal" class="form-label">PO Number</label>
             <input type="text" class="form-control" id="nomor_po_modal" name="nomor_po" maxlength="13" placeholder="Ketik Nomor PO..." autocomplete="off" required>
             <ul id="po-suggestions" class="list-group mt-1" style="position: absolute; z-index: 1000; width: 90%; display: none;"></ul>
           </div>
 
           <!-- Nama Customer -->
           <div class="mb-3">
-            <label for="customer_name_modal" class="form-label">Nama Customer</label>
+            <label for="customer_name_modal" class="form-label">Customer Name</label>
             <input type="text" class="form-control" id="customer_name_modal" name="customer_name" readonly style="background-color: #e9ecef;">
           </div>
 
           <!-- Tanggal Terima PO -->
           <div class="mb-3">
-            <label for="tanggal_terima_po_modal" class="form-label">Tanggal Terima PO</label>
+            <label for="tanggal_terima_po_modal" class="form-label">PO Received Date</label>
             <input type="text" class="form-control" id="tanggal_terima_po_modal" name="tanggal_terima_po" readonly style="background-color: #e9ecef;">
           </div>
 
           <!-- Tanggal Permintaan -->
           <div class="mb-3">
-            <label for="tanggal_permintaan_modal" class="form-label">Tanggal Permintaan</label>
+            <label for="tanggal_permintaan_modal" class="form-label">Request Date</label>
             <input type="text" class="form-control" id="tanggal_permintaan_modal" name="tanggal_permintaan" readonly style="background-color: #e9ecef;">
           </div>
 

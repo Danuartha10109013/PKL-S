@@ -1,7 +1,12 @@
 @extends('layout.produksi.main')
 
 @section('title')
-    Dashboard || {{ Auth::user()->role == 0 ? 'Admin' : 'Pegawai' }}
+    Dashboard || {{
+    Auth::user()->role == 0 ? 'Bagian Pengadaan' :
+    (Auth::user()->role == 1 ? 'Bagian Produksi' :
+    (Auth::user()->role == 3 ? 'Bagian Penjualan' : 'undifined'))
+}}
+
 @endsection
 
 @section('pages')
@@ -11,7 +16,7 @@
 @section('content')
 <div class="container-fluid py-4">
     <div class="container ml-2">
-        <p class="fs-4">Hello, Selamat Datang <span class="fw-bold">{{ Auth::user()->name }}</span>!</p>
+        <p class="fs-4">Hello, Welcome <span class="fw-bold">{{ Auth::user()->name }}</span>!</p>
 
         <div class="row g-4">
             <!-- Total Jobcards -->

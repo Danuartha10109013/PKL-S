@@ -19,7 +19,7 @@ Kelola Material
                   <tr>
                     <th>No</th>
                     <th>Description</th>
-                    <th>Stok</th>
+                    <th>Stock</th>
                     <th>Unit Price</th>
                     <th>Buying Price</th>
                     <th>Supplier</th>
@@ -66,7 +66,7 @@ Kelola Material
                               <input type="text" class="form-control" id="name" name="name" value="{{ $d->name }}" style="outline: 1px solid #007bff;">
                             </div>
                             <div class="mb-3">
-                              <label for="stok" class="form-label">Stok</label>
+                              <label for="stok" class="form-label">Stock</label>
                               <input type="number" class="form-control" id="stok" name="stok" value="{{ $d->stok }}" min="0" style="outline: 1px solid #007bff;">
                             </div>
                             <div class="mb-3">

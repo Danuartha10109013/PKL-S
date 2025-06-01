@@ -24,6 +24,7 @@
                                 <th>Nama Customer</th>
                                 <th>Product</th>
                                 <th>Action</th>
+                                {{-- <th>Job Card</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -73,6 +74,16 @@
 
 
                                     </td>
+                                    {{-- <td>
+                                        @php
+                                            $jobcard = \App\Models\JobCardM::where('no_po',$order->nomor_po)->first();
+                                        @endphp
+                                        @if ($jobcard)
+                                        <a href="{{route('penjualan.jobcard.print',$jobcard->id)}}" class="btn btn-success">Go To Jobcard</a>
+                                        @else
+                                        No Available
+                                        @endif
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
@@ -95,15 +106,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="nomor_po" class="form-label">Nomor PO</label>
+                        <label for="nomor_po" class="form-label">PO Number</label>
                         <input type="text" style="border: 1px solid #000; outline: none;" value="{{$newPoNumber}}" class="form-control" name="nomor_po" readonly required>
                     </div>
                     <div class="mb-3">
-                        <label for="tanggal_penawaran" class="form-label">Tanggal Penawaran</label>
+                        <label for="tanggal_penawaran" class="form-label">PO Offer Date</label>
                         <input type="date" class="form-control" style="border: 1px solid #000; outline: none;" name="tanggal_penawaran" required>
                     </div>
                     <div class="mb-3">
-                        <label for="nama_customer" class="form-label">Nama Customer</label>
+                        <label for="nama_customer" class="form-label">Customer Name</label>
                         <input type="text" style="border: 1px solid #000; outline: none;" class="form-control" name="nama_customer" required>
                     </div>
                     <div class="mb-3">
@@ -128,28 +139,28 @@
                         <input type="text" style="border: 1px solid #000; outline: none;" value="{{$newPenawaranNumber}}" class="form-control" name="no_penawaran" required>
                     </div> --}}
                     <div class="mb-3">
-                        <label for="status_penawaran" class="form-label">Status Penawaran</label>
+                        <label for="status_penawaran" class="form-label">Offer Status</label>
                         <input type="text" style="border: 1px solid #000; outline: none;" class="form-control" value="Disetujui" readonly name="status_penawaran" required>
                     </div>
                     <div class="mb-3">
-                        <label for="tanggal_permintaan" class="form-label">Tanggal Permintaan</label>
+                        <label for="tanggal_permintaan" class="form-label">Request Date</label>
                         <input type="date" style="border: 1px solid #000; outline: none;" class="form-control" name="tanggal_permintaan" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="tanggal_terima_po" class="form-label">Tanggal Terima PO</label>
+                        <label for="tanggal_terima_po" class="form-label">PO Received Date</label>
                         <input type="date" style="border: 1px solid #000; outline: none;" class="form-control" name="tanggal_terima_po" required>
                     </div>
                     <div class="mb-3">
-                        <label for="harga_ditawarkan" class="form-label">Harga Ditawarkan</label>
+                        <label for="harga_ditawarkan" class="form-label">Price Offered</label>
                         <input type="number" style="border: 1px solid #000; outline: none;" class="form-control" name="harga_ditawarkan" required>
                     </div>
                     <div class="mb-3">
-                        <label for="harga_disetujui" class="form-label">Harga Disetujui</label>
+                        <label for="harga_disetujui" class="form-label">Price Agreed</label>
                         <input type="number" style="border: 1px solid #000; outline: none;" class="form-control" name="harga_disetujui" required>
                     </div>
                     <div class="mb-3">
-                        <label for="catatan" class="form-label">Catatan</label>
+                        <label for="catatan" class="form-label">Notes</label>
                         <textarea class="form-control" style="border: 1px solid #000; outline: none;" name="catatan" rows="3"></textarea>
                     </div>
 

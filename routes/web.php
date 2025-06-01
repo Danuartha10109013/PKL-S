@@ -82,6 +82,8 @@ Route::middleware([AutoLogout::class])->group(function () {
         Route::prefix('laporan')->group(function () {
 
         });
+        Route::get('/print/{id}', [JobCardController::class, 'print'])->name('jobcard.print');
+
         Route::prefix('po')->group(function () {
             Route::get('/', [KPoController::class, 'index'])->name('po'); 
             Route::post('/store', [KPoController::class, 'store'])->name('po.store'); 

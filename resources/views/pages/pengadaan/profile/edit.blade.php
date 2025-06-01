@@ -1,12 +1,7 @@
 @extends('layout.produksi.main')
 
 @section('title')
-    @if (Auth::user()->role == 0)
-    
-    Dashboard || Admin
-    @elseif (Auth::user()->role == 1)
-    Dashboard || Pegawai
-    @endif
+    Edit Profile || {{Auth::user()->name}}
 @endsection
 @section('pages')
 Edit Profile

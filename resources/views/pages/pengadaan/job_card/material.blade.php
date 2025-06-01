@@ -5,7 +5,7 @@
 @endsection
 
 @section('pages')
-    Kelola Material || {{ $data->no_jobcard }}
+    Manage Material || {{ $data->no_jobcard }}
 @endsection
 
 @section('content')

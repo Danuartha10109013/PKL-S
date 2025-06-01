@@ -155,20 +155,21 @@ class JobCardController extends Controller
             'no_po' => 'required|string|max:255',
             'po_date' => 'required|date',
             'po_received' => 'required|date',
-            'totalbop' => 'required|numeric',
-            'totalsp' => 'required|numeric',
-            'totalbp' => 'required|numeric',
+            // 'totalbop' => 'required|numeric',
+            // 'totalsp' => 'required|numeric',
+            // 'totalbp' => 'required|numeric',
             'no_form' => 'required|string|max:255',
             'effective_date' => 'required|date',
             'no_revisi' => 'required|integer',
         ]);
-
+        // dd($validator);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
         // Update Job Card
         $jobCard = JobCardM::findOrFail($id);
+        // dd($jobCard);
         $jobCard->no_jobcard = $request->no_jobcard;
         $jobCard->date = $request->date;
         $jobCard->kurs = $request->kurs;
@@ -176,9 +177,9 @@ class JobCardController extends Controller
         $jobCard->no_po = $request->no_po;
         $jobCard->po_date = $request->po_date;
         $jobCard->po_received = $request->po_received;
-        $jobCard->totalbop = $request->totalbop;
-        $jobCard->totalsp = $request->totalsp;
-        $jobCard->totalbp = $request->totalbp;
+        // $jobCard->totalbop = $request->totalbop;
+        // $jobCard->totalsp = $request->totalsp;
+        // $jobCard->totalbp = $request->totalbp;
         $jobCard->no_form = $request->no_form;
         $jobCard->effective_date = $request->effective_date;
         $jobCard->no_revisi = $request->no_revisi;
