@@ -140,7 +140,9 @@
                             <div class="col-2 text-wrap text-break">
                                 <strong>Notes</strong>
                                 <hr class="my-1">
+                                @if($produk)
                                 {{$produk->catatan}}
+                                @endif
                             </div>
                         </div>
                     </li>
