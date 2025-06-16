@@ -92,6 +92,10 @@ class KelolaMaterialController extends Controller
         'supplier' => $request->supplier,
     ]);
 
+    $notif = NotifM::where('judul', 'like', "%$request->name%")->first();
+    if($notif){
+        $notif->delete();
+    }
     // Redirect with success message
     return redirect()->route('produksi.kmaterial')->with('success', 'New material added successfully.');
 }

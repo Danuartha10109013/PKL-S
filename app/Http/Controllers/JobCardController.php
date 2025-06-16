@@ -7,6 +7,8 @@ use App\Models\JobCard; // Ensure you have this model for Job Card
 use App\Models\JobCardDetailM;
 use App\Models\JobCardM;
 use App\Models\Material;
+use App\Models\NotifM;
+use App\Models\NotifPengadaanM;
 use App\Models\POM;
 use Illuminate\Support\Facades\Validator;
 
@@ -122,7 +124,14 @@ class JobCardController extends Controller
         $jobCard->effective_date = $request->effective_date;
         $jobCard->no_revisi = $request->no_revisi;
         $jobCard->save();
+        
+        $nomorPO = $request->nomor_po;
 
+        $notif = NotifPengadaanM::where('value', 'like', "%$nomorPO%")->first();
+
+        if ($notif) {
+            $notif->delete();
+        }
         return redirect()->route('pengadaan.jobcard')->with('success', 'Job Card added successfully!');
     }
 
