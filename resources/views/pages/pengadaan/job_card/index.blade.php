@@ -169,8 +169,8 @@ Job Card
                                       @php
                                         $no_revisi_new = $jobCard->no_revisi + 1 ;
                                       @endphp
-                                        <label for="no_revisi" class="form-label">No Revisi</label>
-                                        <input type="number" class="form-control" id="no_revisi" style="border: 1px solid #000; outline: none;" name="no_revisi" value="{{$no_revisi_new}}">
+                                        <!-- <label for="no_revisi" class="form-label">No Revisi</label> -->
+                                        <input type="hidden" class="form-control" id="no_revisi" style="border: 1px solid #000; outline: none;" name="no_revisi" value="{{$no_revisi_new}}">
                                     </div>
                                     </div>
                                     <div class="modal-footer">
