@@ -35,9 +35,9 @@ class KelolaMaterialController extends Controller
         // Validate the request data
         $request->validate([
             'name' => 'required|string|max:255',
-            'stok' => 'required|integer',
-            'unit_price' => 'required|numeric',
-            'buying_price' => 'required|numeric',
+            'stok' => 'required|integer|min:1|max:5000',
+            'unit_price' => 'required|numeric|min:1|max:2147483647',
+            'buying_price' => 'required|numeric|min:1|max:2147483647',
             'supplier' => 'required|string|max:255',
         ]);
 
@@ -77,9 +77,9 @@ class KelolaMaterialController extends Controller
     // Validate the form input
     $request->validate([
         'name' => 'required|string|max:255',
-        'stok' => 'required|integer',
-        'unit_price' => 'required|numeric',
-        'buying_price' => 'required|numeric',
+        'stok' => 'required|integer|min:1|max:5000',
+        'unit_price' => 'required|numeric|min:1|max:2147483647',
+        'buying_price' => 'required|numeric|min:1|max:2147483647',
         'supplier' => 'required|string|max:255',
     ]);
 

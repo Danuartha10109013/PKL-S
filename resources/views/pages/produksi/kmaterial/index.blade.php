@@ -9,6 +9,16 @@ Kelola Material
 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
   <i class="material-icons text-white">add</i> Add Material
 </a>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li style="color: white">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="container-fluid py-2">
     <div class="row">
       <div class="card">

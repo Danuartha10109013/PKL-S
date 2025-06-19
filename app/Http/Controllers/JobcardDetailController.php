@@ -32,18 +32,19 @@ class JobcardDetailController extends Controller
         // dd($request->all());
 
         // Validate incoming request data
-        $validatedData = $request->validate([
-            'qty' => 'required|integer',
+       $request->validate([
+            'qty' => 'required|integer|min:1|max:5000',
             'description' => 'required|string|max:255',
-            'unit_bop' => 'required|numeric',
-            'total_bop' => 'required|numeric',
-            'unit_sp' => 'required|numeric',
-            'total_sp' => 'required|numeric',
-            'unit_bp' => 'required|numeric',
-            'total_bp' => 'required|numeric',
+            'unit_bop' => 'required|numeric|min:0|max:99999999999',
+            'total_bop' => 'required|numeric|min:0|max:99999999999',
+            'unit_sp' => 'required|numeric|min:0|max:99999999999',
+            'total_sp' => 'required|numeric|min:0|max:99999999999',
+            'unit_bp' => 'required|numeric|min:0|max:99999999999',
+            'total_bp' => 'required|numeric|min:0|max:99999999999',
             'supplier' => 'nullable|string|max:255',
             'remarks' => 'nullable|string|max:255',
         ]);
+
         // Store the data in the database (assuming you have a JobCardDetail model)
         $jobcard = new JobCardDetailM();
         $jobcard->jobcard_id = $request->job_card_id;

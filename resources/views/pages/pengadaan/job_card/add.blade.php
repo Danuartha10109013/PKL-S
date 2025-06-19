@@ -18,7 +18,15 @@
 @section('content')
 <div class="card">
 <div class="container-fluid mt-0">
-
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li style="color: white">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         <form action="{{ route('pengadaan.jobcard.detail.store') }}" method="POST">
             @csrf
 
@@ -45,7 +53,7 @@
 
             <div class="form-group">
                 <label for="qty">Quantity</label>
-                <input type="number" class="form-control" id="qty" name="qty" required style="outline: 1px solid #007bff;">
+                <input type="number" min="1" class="form-control" id="qty" name="qty" required style="outline: 1px solid #007bff;">
             </div>
 
             <div class="form-group">
