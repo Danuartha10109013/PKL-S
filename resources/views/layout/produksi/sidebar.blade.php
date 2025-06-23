@@ -50,7 +50,7 @@
         <i class="material-icons opacity-10">table_view</i>
     </div>
     
-    <span class="nav-link-text ms-1">Kelola Material</span>
+    <span class="nav-link-text ms-1">Manage Materials</span>
 </a>
 </li>
 {{--
