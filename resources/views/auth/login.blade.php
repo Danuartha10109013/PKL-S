@@ -17,6 +17,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <link id="pagestyle" href="{{asset('vendor')}}/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
   <!-- SweetAlert -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -68,10 +70,33 @@
                     <label class="form-label">Username Or Email</label>
                     <input type="text" name="username" class="form-control">
                   </div>
-                  <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control">
+                  <div class="input-group input-group-outline my-3 position-relative">
+                    <label class="form-label" for="passwordInput">Password</label>
+                    <input type="password" name="password" class="form-control pr-5" id="passwordInput">
+                    
+                    <!-- Toggle icon positioned absolutely -->
+                    <span onclick="togglePasswordVisibility()" style="position: absolute; top: 10px; right: 15px; cursor: pointer;">
+                      <i class="fas fa-eye" id="toggleIcon"></i>
+                    </span>
                   </div>
+
+                  <script>
+                    function togglePasswordVisibility() {
+                      const passwordInput = document.getElementById("passwordInput");
+                      const toggleIcon = document.getElementById("toggleIcon");
+                      if (passwordInput.type === "password") {
+                        passwordInput.type = "text";
+                        toggleIcon.classList.remove("fa-eye");
+                        toggleIcon.classList.add("fa-eye-slash");
+                      } else {
+                        passwordInput.type = "password";
+                        toggleIcon.classList.remove("fa-eye-slash");
+                        toggleIcon.classList.add("fa-eye");
+                      }
+                    }
+                  </script>
+
+
                   <div class="form-check form-switch d-flex align-items-center mb-3">
                     <input class="form-check-input" type="checkbox" id="rememberMe" checked>
                     <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember me</label>
