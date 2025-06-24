@@ -73,7 +73,7 @@ Kelola Material
                             @method('PUT')
                             <div class="mb-3">
                               <label for="name" class="form-label">Description</label>
-                              <input type="text" class="form-control" id="name" name="name" value="{{ $d->name }}" style="outline: 1px solid #007bff;">
+                              <input type="text" class="form-control" id="name" name="name" value="{{ preg_replace('/\s*\(.*\)$/', '', $d->name) }}" style="outline: 1px solid #007bff;">
                             </div>
                             <div class="mb-3">
                               <label for="stok" class="form-label">Stock</label>

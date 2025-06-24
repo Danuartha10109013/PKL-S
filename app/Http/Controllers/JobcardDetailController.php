@@ -15,16 +15,26 @@ class JobcardDetailController extends Controller
         $mt = Material::all();
 
     // Kelompokkan berdasarkan nama
-    $grouped = $mt->groupBy('name');
 
     // Proses penamaan ulang jika ada nama yang sama
-    $material = $mt->map(function ($item) use ($grouped) {
-        if ($grouped[$item->name]->count() > 1) {
-            // Tambahkan nama supplier jika nama material duplikat
-            $item->name = $item->name . ' (' . $item->supplier . ')';
+    $material = $mt->groupBy(function ($item) {
+        return trim(strtolower($item->name)); // normalize case dan spasi
+    })->map(function ($items, $name) {
+        if ($items->count() > 1) {
+            return (object)[
+                'name'         => $items->first()->name . ' (' . $items->pluck('supplier')->implode(', ') . ')',
+                'stok'         => $items->sum('stok'),
+                'supplier'     => $items->pluck('supplier')->implode(', '),
+                'id'           => $items->first()->id,
+                'unit_price'   => $items->first()->unit_price,
+                'buying_price' => $items->first()->buying_price,
+            ];
+        } else {
+            return $items->first();
         }
-        return $item;
-    });
+    })->values();
+
+
         return view('pages.pengadaan.job_card.add',compact('material','id'));
     }
     public function store(Request $request)
@@ -60,10 +70,37 @@ class JobcardDetailController extends Controller
         $jobcard->remarks = $request->remarks;
         $jobcard->save();
 
-        $material = Material::find($request->id);
-        $material->stok = $material->stok - $request->qty;
-        // dd($material->stok);
-        $material->save();
+            $sisaQty = $request->qty;
+            $nameOnly = preg_replace('/\s*\(.*\)$/', '', $request->description);
+
+            // dd($nameOnly);
+            // Ambil semua material dengan nama yang sama dan stok > 0, urutkan berdasarkan ID
+            $materials = Material::where('name', $nameOnly)
+            ->where('stok', '>', 0) 
+            ->get();
+            // dd($materials);
+
+            foreach ($materials as $material) {
+                if ($sisaQty <= 0) break;
+
+                if ($material->stok >= $sisaQty) {
+                    // Cukup dikurangi di satu material ini
+                    $material->stok -= $sisaQty;
+                    $material->save();
+                    $sisaQty = 0;
+                } else {
+                    // Kurangi semua stok dari material ini, lanjut ke material berikutnya
+                    $sisaQty -= $material->stok;
+                    $material->stok = 0;
+                    $material->save();
+                }
+
+                // Di sini kamu bisa juga simpan log pemakaian (MaterialUsage::create)
+            }
+
+            if ($sisaQty > 0) {
+                return back()->with('error', 'Stok tidak mencukupi.');
+            }
 
         $jc = JobCardM::find($request->job_card_id);
         $jc->totalbop = $jc->totalbop + $request->total_bop;
