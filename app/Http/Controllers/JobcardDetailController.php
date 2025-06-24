@@ -22,7 +22,7 @@ class JobcardDetailController extends Controller
     })->map(function ($items, $name) {
         if ($items->count() > 1) {
             return (object)[
-                'name'         => $items->first()->name . ' (' . $items->pluck('supplier')->implode(', ') . ')',
+                'name'         => $items->first()->name,
                 'stok'         => $items->sum('stok'),
                 'supplier'     => $items->pluck('supplier')->implode(', '),
                 'id'           => $items->first()->id,
